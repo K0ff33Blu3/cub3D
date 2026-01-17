@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/17 15:28:01 by miricci          ###   ########.fr       */
+/*   Created: 2026/01/17 15:22:37 by miricci           #+#    #+#             */
+/*   Updated: 2026/01/17 15:28:19 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "cub3D.h"
 
-# define WID	1920
-# define LEN	1080
-
-// INCLUDE
-# include "minilibx-linux/mlx.h"
-# include "libft.h"
-
-# include <stdlib.h>
-# include <stdio.h>
-
-typedef	struct s_game
+t_game	*init_game(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-}	t_game;
-
-// init.c
-
-t_game	*init_game(void);
-
-#endif
+	t_game	*game;
+	
+	game = ft_calloc(1, sizeof(t_game));
+	if (!game)
+		return (NULL);
+	game->mlx = mlx_init();
+	game->mlx_win = mlx_new_window(game->mlx, WID, LEN, "cub3D");
+	return (game);
+}

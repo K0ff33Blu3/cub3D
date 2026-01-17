@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/17 15:28:01 by miricci          ###   ########.fr       */
+/*   Created: 2026/01/17 15:27:02 by miricci           #+#    #+#             */
+/*   Updated: 2026/01/17 15:30:12 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "cub3D.h"
 
-# define WID	1920
-# define LEN	1080
-
-// INCLUDE
-# include "minilibx-linux/mlx.h"
-# include "libft.h"
-
-# include <stdlib.h>
-# include <stdio.h>
-
-typedef	struct s_game
+void	handle_events(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-}	t_game;
-
-// init.c
-
-t_game	*init_game(void);
-
-#endif
+		mlx_
+}

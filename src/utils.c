@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/17 15:28:01 by miricci          ###   ########.fr       */
+/*   Created: 2026/01/17 15:06:21 by miricci           #+#    #+#             */
+/*   Updated: 2026/01/17 15:10:26 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "cub3D.h"
 
-# define WID	1920
-# define LEN	1080
+// void	putpixels(int x, int y, int color)
+// {
+// 	int	*offset;
+// 	int	index;
+// 	int	pixels_per_line;
 
-// INCLUDE
-# include "minilibx-linux/mlx.h"
-# include "libft.h"
-
-# include <stdlib.h>
-# include <stdio.h>
-
-typedef	struct s_game
-{
-	void	*mlx;
-	void	*mlx_win;
-}	t_game;
-
-// init.c
-
-t_game	*init_game(void);
-
-#endif
+// 	pixels_per_line = line_len / 4;
+// 	offset = (int *)fractal->img_addr;
+// 	index = y * pixels_per_line + x;
+// 	offset[index] = color;
+// }

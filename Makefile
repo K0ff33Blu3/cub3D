@@ -17,7 +17,7 @@ LDFLAGS  	+= -L$(LIBFT_DIR) -lft
 
 # Compilatore e flags
 CC		:= cc
-CFLAGS		:= -g  -I$(INC_DIR) -I$(LIBFT_DIR)
+CFLAGS		:= -Wall -Wextra -Werror -g  -I$(INC_DIR) -I$(LIBFT_DIR)
 
 # Sorgenti
 SRCS		:= $(shell find $(SRC_DIR) -name "*.c")
