@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:59:27 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/17 16:37:10 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/17 16:54:03 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	close_display(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->mlx_win);
 	mlx_destroy_display(game->mlx);
+	free(game->mlx);
 	free(game);
 	exit(EXIT_SUCCESS);
 }
