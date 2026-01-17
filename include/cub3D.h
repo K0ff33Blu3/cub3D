@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/17 15:49:20 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/17 16:14:43 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # include <sys/time.h>
 # include <X11/X.h>
 
-# include "libft.h"
+# include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 
@@ -53,8 +53,13 @@ typedef	struct s_game
 	void	*mlx_win;
 }	t_game;
 
-// init.c
+int		close_display(t_game *game);
 
+// init.c
 t_game	*init_game(void);
+
+// events.c
+void	handle_events(t_game *game);
+int		on_keypress(int keycode, t_game *game);
 
 #endif
