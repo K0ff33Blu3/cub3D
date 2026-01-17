@@ -3,16 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:27:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/17 15:30:12 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/17 15:48:27 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	handle_events(void)
-{
-		mlx_
-}
