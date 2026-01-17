@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/17 15:50:43 by elmondo          ###   ########.fr       */
+/*   Created: 2026/01/17 11:59:27 by miricci           #+#    #+#             */
+/*   Updated: 2026/01/17 15:48:10 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "cub3D.h"
 
-// SCREEN
+int	close_display(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->mlx_win);
+	mlx_destroy_display(game->mlx);
+	free(game);
+	exit(EXIT_SUCCESS);
+}
 
-# define WID	600
-# define LEN	400
+int	main(void)
+{
+	t_game	*game;
 
-// KEYLOG
-
-#define W 119
-#define S 115
-#define A 97
-#define D 100
-#define ESC 65307
-#define UP 65362
-#define DOWN 65364
-#define LEFT 65361
-#define RIGHT 65363
-#define LSHIFT 65505
-#define LALT 65513
-
-// INCLUDE
-
-
-#endif
+	game = init_game();
+	//handle_events(game);
+	mlx_loop(game->mlx);
+	close_display(game);
+	return (0);
+}
