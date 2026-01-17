@@ -8,7 +8,7 @@ INC_DIR		:= include
 
 # MiniLibX
 MLX_DIR     := $(INC_DIR)/minilibx-linux
-MLX_FLAGS		:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -03
+MLX_FLAGS		:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm 
 
 # Libreria
 LIBFT_DIR	:= $(INC_DIR)/libft
@@ -17,7 +17,7 @@ LDFLAGS  	+= -L$(LIBFT_DIR) -lft
 
 # Compilatore e flags
 CC		:= cc
-CFLAGS		:= -g  -I$(INC_DIR) -I$(LIBFT_DIR)
+CFLAGS		:= -Wall -Wextra -Werror -g  -I$(INC_DIR) -I$(LIBFT_DIR)
 
 # Sorgenti
 SRCS		:= $(shell find $(SRC_DIR) -name "*.c")
