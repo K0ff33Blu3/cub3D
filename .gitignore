@@ -53,3 +53,6 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# MLX
+include/minilibx-linux/
