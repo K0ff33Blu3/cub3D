@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_mine.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/17 15:06:21 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/18 13:05:34 by elmondo          ###   ########.fr       */
+/*   Created: 2026/01/18 16:31:17 by elmondo           #+#    #+#             */
+/*   Updated: 2026/01/18 16:56:31 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
-// void	putpixels(int x, int y, int color)
-// {
-// 	int	*offset;
-// 	int	index;
-// 	int	pixels_per_line;
+void	error_msg(char *msg)
+{
+	printf("Error%s\n", msg);
+}
 
-// 	pixels_per_line = line_len / 4;
-// 	offset = (int *)fractal->img_addr;
-// 	index = y * pixels_per_line + x;
-// 	offset[index] = color;
-// }
+void	error_msg2(char *msg, char print_char)
+{
+	printf("Error%s %c in map\n", msg, print_char);
+}
+
 
 

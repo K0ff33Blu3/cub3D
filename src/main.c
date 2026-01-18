@@ -6,11 +6,11 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:59:27 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/18 10:43:54 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/18 16:49:32 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
 int	close_display(t_game *game)
 {
@@ -21,11 +21,20 @@ int	close_display(t_game *game)
 	exit(EXIT_SUCCESS);
 }
 
-int	main(void)
+
+
+int	main(int argc, char **argv)
 {
 	t_game	*game;
+	t_map	m_map;
 
+	if (argc != 2)
+		return (error_msg(ERR_ARGS), 1);
+	ft_memset(&m_map, 0, sizeof(t_map));
+	if (parsing(argv[1], &m_map) != 0)
+		return (1);
 	game = init_game();
+	game->map = &m_map;
 	handle_events(game);
 	mlx_loop(game->mlx);
 	close_display(game);

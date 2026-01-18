@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:22:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/17 16:11:03 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/18 12:45:59 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
 t_game	*init_game(void)
 {
