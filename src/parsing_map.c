@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:05:02 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 16:55:55 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/18 18:13:25 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ int	walls_checker(char *line, t_map *mlx)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
-		if (check_s_wall(line, &mlx->NO_text_path))
+		if (check_s_wall(line, &mlx->no_text_path))
 			return (1);
 	}
 	else if (ft_strncmp(line, "SO ", 3) == 0)
 	{
-		if (check_s_wall(line, &mlx->SO_text_path))
+		if (check_s_wall(line, &mlx->so_text_path))
 			return (1);
 	}
 	else if (ft_strncmp(line, "WE ", 3) == 0)
 	{
-		if (check_s_wall(line, &mlx->EA_text_path))
+		if (check_s_wall(line, &mlx->we_text_path))
 			return (1);
 	}
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 	{
-		if (check_s_wall(line, &mlx->WE_text_path))
+		if (check_s_wall(line, &mlx->ea_text_path))
 			return (1);
 	}
 	return (0);
@@ -46,19 +46,17 @@ int	parsing_map(char **map, int line, int c)
 	line = 0;
 	while (map[line] != NULL)
 	{
-		if (map[line][c] == '\0')
+		c = 0;
+		while (map[line][c] != '\0')
 		{
-			line++;
-			c = 0;
+			while (map[line][c] == '1' || map[line][c] == ' ')
+				c++;
+			if (map[line][c] != '\0' && check_map(map, line, c, "01NSEW\0"))
+				return (1);
+			if (map[line][c] != '\0')
+				c++;
 		}
-		if (map[line] == NULL)
-			break ;
-		while (map[line][c] == '1' || map[line][c] == ' ')
-			c++;
-		if (map[line][c] != '\0' && check_map(map, line, c, "01NSEW\0"))
-			return (1);
-		if (map[line][c] != '\0')
-			c++;
+		line++;
 	}
 	return (0);
 }
@@ -98,31 +96,26 @@ int	check_map(char **map, int line, int count, char *allowed)
 	return (0);
 }
 
-char **get_map(char *line, int fd, int i)
+char	**get_map(char *line, int fd, int i)
 {
-	char **map;
+	char	**map;
 
 	map = (char **)malloc(sizeof(char *));
-	if (map == NULL)
-		return (error_msg(MALLOC), close(fd), NULL);
-	while (line != NULL)
+	if (!map)
+		return (error_msg(MALLOC), NULL);
+	while (line)
 	{
 		map = ft_realloc(map, (i + 1) * sizeof(char *),
-						 (i + 2) * sizeof(char *));
-		if (map == NULL)
-			return (error_msg(MALLOC), close(fd), free(line), NULL);
+				(i + 2) * sizeof(char *));
+		if (!map)
+			return (error_msg(MALLOC), free(line), NULL);
 		if (is_white(line) && !ft_strchr(line, ' '))
-		{
-			map[i] = trim_back_nl(line);
-			return (map[++i] = NULL, error_msg(ERR_NEWLINE_MAP), close(fd),
-					free_mtx((void **)map), NULL);
-		}
-		map[i] = trim_back_nl(line);
+			return (error_msg(ERR_NEWLINE_MAP), free_mtx((void **)map), NULL);
+		map[i++] = trim_back_nl(line);
 		line = get_next_line(fd);
-		i++;
 	}
 	map[i] = NULL;
 	if (parsing_map(map, 0, 0) == 1)
-		return (close(fd), free_mtx((void **)map), NULL);
-	return (close(fd), map);
+		return (free_mtx((void **)map), NULL);
+	return (map);
 }

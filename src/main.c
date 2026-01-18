@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:59:27 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/18 16:49:32 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/18 17:59:19 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	close_display(t_game *game)
 	free(game);
 	exit(EXIT_SUCCESS);
 }
-
-
 
 int	main(int argc, char **argv)
 {

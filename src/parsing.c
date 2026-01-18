@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 16:57:23 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/18 17:56:49 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	parse_rgb(char *str, int *rgb, int *is_set)
 	rgb[1] = ft_atoi(values[1]);
 	rgb[2] = ft_atoi(values[2]);
 	free_mtx((void **)values);
-	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0
-		|| rgb[1] > 255 || rgb[2] < 0 || rgb[2] > 255)
+	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255
+		|| rgb[2] < 0 || rgb[2] > 255)
 		return (error_msg(ERR_FC_BOUNDS), 1);
 	*is_set = 1;
 	return (0);
@@ -99,8 +99,8 @@ int	walls_ceiling(char *line, int fd, t_map *m_map)
 		result = walls_ceiling_map(line, start, m_map);
 		if (result == 1)
 			return (free(start), 1);
-		else if (result == 2)
-			return (0);
+		if (result == 2)
+			return (free(start), 0);
 		free(start);
 		line = get_next_line(fd);
 	}
@@ -121,11 +121,11 @@ int	parsing(const char *path, t_map *m_map)
 	line = get_next_line(fd);
 	if (walls_ceiling(line, fd, m_map) != 0)
 		return (close(fd), 1);
-	if (m_map->floor_rgb[0] == -1 || m_map->ceiling_rgb[0] == -1)
-		return (error_msg(ERR_FC_MISS), close(fd), free(m_map->tmp_line), 1);
-	if (m_map->NO_text_path == NULL || m_map->SO_text_path == NULL
-		|| m_map->EA_text_path == NULL || m_map->WE_text_path == NULL)
-		return (error_msg(ERR_WALL_MISS), close(fd), free(m_map->tmp_line), 1);
+	if (!m_map->floor_set || !m_map->ceiling_set)
+		return (error_msg(ERR_FC_MISS), close(fd), 1);
+	if (m_map->no_text_path == NULL || m_map->so_text_path == NULL
+		|| m_map->ea_text_path == NULL || m_map->we_text_path == NULL)
+		return (error_msg(ERR_WALL_MISS), close(fd), 1);
 	if (!m_map->tmp_line)
 		return (error_msg(ERR_NO_MAP), close(fd), 1);
 	map = get_map(m_map->tmp_line, fd, 0);
