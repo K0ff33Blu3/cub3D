@@ -26,5 +26,4 @@ t_map	*hardcoded_map()
 	map->player->dir.y = -1;
 	map->player->plane.x = 0.66;
 	map->player->plane.y = 0;
-
 }
