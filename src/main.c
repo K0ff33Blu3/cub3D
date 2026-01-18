@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:59:27 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/17 16:12:59 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/18 16:44:04 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(void)
 
 	game = init_game();
 	handle_events(game);
+	render_frame(game);
 	mlx_loop(game->mlx);
 	close_display(game);
 	return (0);
