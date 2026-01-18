@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:22:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/17 15:28:19 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/17 16:11:03 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_game	*init_game(void)
 {
 	t_game	*game;
 	
-	game = ft_calloc(1, sizeof(t_game));
+	game = (t_game *)malloc(sizeof(t_game));
 	if (!game)
 		return (NULL);
 	game->mlx = mlx_init();

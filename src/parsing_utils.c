@@ -1,29 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/17 16:12:00 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/17 16:12:33 by elmondo          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/cub3D.h"
 
 int	ft_mapchr(char *str, const char *map)
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
-	while (str[i])
+	while(str[i])
 	{
-		if (ft_strchr(map, str[i]) == NULL)
+		if(ft_strchr(map, str[i]) == NULL)
 			return (str[i]);
 		i++;
 	}
-	return (0);
+	return 0;
 }
 
 int is_file_type(const char *file, const char *type)
