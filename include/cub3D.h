@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/17 16:21:55 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/18 10:39:23 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define LEN	400
 
 // KEYLOG
+
 
 #define W 119
 #define S 115
@@ -76,10 +77,42 @@ in scene description file"
 #define ERR_IP_FORMAT "wrong IP format"
 #define ERR_MALLOC "malloc failure"
 
+typedef struct s_vect
+{
+	double	x;
+	double	y;
+} t_vect;
+
+typedef struct s_player
+{
+	t_vect	pos;
+	t_vect	dir;
+	t_vect	plane;
+	
+}	t_player;
+
+typedef	struct s_map
+{
+	char **map_skeleton;
+	char	*NO_text_path;
+	char	*SO_text_path;
+	char	*EA_text_path;
+	char	*WE_text_path;
+	int		floor_rgb[3];
+	int		ceiling_rgb[3];
+	int		map_width;
+	int		map_height;
+	t_player	*player;
+
+	
+}	t_map;
+
 typedef	struct s_game
 {
 	void	*mlx;
 	void	*mlx_win;
+	t_map	*map;
+	
 }	t_game;
 
 int		close_display(t_game *game);
