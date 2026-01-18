@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/17 16:53:51 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/18 10:43:02 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,8 @@
 # define WID	600
 # define LEN	400
 
-#define MAP_ALLOWED "01NSEW \n"
-
-// array walls images
-
-#define NO 0
-#define SO 1
-#define EA 2
-#define WE 3
-
-// ERRORS
-
-#define ERR_ARGS "	incorrect arguments number"
-#define ERR_FORMAT "	incorrect file format"
-#define ERR_OPEN "	failed to open path"
-#define ERR_FC_MISS "	floor or ceiling is missing in scene description file"
-#define ERR_WALL_MISS "	wall is missing in scene description file"
-#define ERR_FC_FORMAT "	color format invalid"
-#define ERR_FC_BOUNDS "	color value out of bounds"
-#define ERR_NEWLINE_MAP "	empty line in map"
-#define ERR_OPEN_MAP "	open map"
-#define ERR_NO_MAP "	missing map"
-#define ERR_PATH_WALL "	wall path incorrect"
-#define ERR_SPACE_END_PATH "	trim chars at end of wall path"
-#define ERR_SPAWN "	map needs exactly ONE of the following chars: N S W E"
-#define BAD_CHAR "	invalid character"
-#define ERR_CHAR_FILE "	invalid character in scene description file"
-#define MALLOC "	malloc failure"
-#define ERR_ENVP " missing env variable(s)"
-#define ERR_MALLOC "malloc failure"
-
-
-// SCREEN
-
-# define WID	600
-# define LEN	400
-
 // KEYLOG
+
 
 #define W 119
 #define S 115
@@ -83,10 +48,69 @@
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 
+// ERROR
+
+#define ERR_ARGS "	incorrect arguments number"
+#define ERR_FORMAT "	incorrect file format"
+#define ERR_OPEN "	failed to open path"
+#define ERR_EMPTY_OR_FOLDER "	path points to empty file or folder"
+#define ERR_WALL_REPEAT "	wall is repeated in scene description file"
+#define ERR_FC_REPEAT "	floor or ceiling is repeated \
+in scene description file"
+#define ERR_FC_MISS "	floor or ceiling is missing in scene description file"
+#define ERR_WALL_MISS "	wall is missing in scene description file"
+#define ERR_FC_FORMAT "	color format invalid"
+#define ERR_FC_BOUNDS "	color value out of bounds"
+#define ERR_NEWLINE_MAP "	empty line in map"
+#define ERR_OPEN_MAP "	open map"
+#define ERR_NO_MAP "	missing map"
+#define ERR_PATH_WALL "	wall path incorrect"
+#define ERR_SPACE_END_PATH "	trim chars at end of wall path"
+#define ERR_SPAWN "	map needs exactly ONE of the following chars: N S W E"
+#define BAD_CHAR "	invalid character"
+#define ERR_CHAR_FILE "	invalid character in scene description file"
+#define MALLOC "	malloc failure"
+#define ERR_ENVP " missing env variable(s)"
+#define ERR_ONLINE "online setup failed"
+#define ERR_IP_FORMAT "wrong IP format"
+#define ERR_MALLOC "malloc failure"
+
+typedef struct s_vect
+{
+	double	x;
+	double	y;
+} t_vect;
+
+typedef struct s_player
+{
+	t_vect	pos;
+	t_vect	dir;
+	t_vect	plane;
+	
+}	t_player;
+
+typedef	struct s_map
+{
+	char **map_skeleton;
+	char	*NO_text_path;
+	char	*SO_text_path;
+	char	*EA_text_path;
+	char	*WE_text_path;
+	int		floor_rgb[3];
+	int		ceiling_rgb[3];
+	int		map_width;
+	int		map_height;
+	t_player	*player;
+
+	
+}	t_map;
+
 typedef	struct s_game
 {
 	void	*mlx;
 	void	*mlx_win;
+	t_map	*map;
+	
 }	t_game;
 
 int		close_display(t_game *game);
