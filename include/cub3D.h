@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 17:13:44 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/18 18:56:54 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,9 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 void	error_msg(char *msg);
 void	error_msg2(char *msg, char print_char);
+void	free_map(char **map);
 
-// parsing map
+	// parsing map
 
 int		parsing_map(char **map, int line, int c);
 int		check_help(int *i, char *allowed);

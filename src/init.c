@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:22:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/18 12:45:59 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/18 18:55:57 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_game	*init_game(void)
 {
 	t_game	*game;
-	
+
 	game = (t_game *)malloc(sizeof(t_game));
 	if (!game)
 		return (NULL);

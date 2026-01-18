@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:06:21 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/18 13:05:34 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/18 18:56:38 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,3 @@
 // 	index = y * pixels_per_line + x;
 // 	offset[index] = color;
 // }
-
-

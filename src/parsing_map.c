@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:05:02 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 18:13:25 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/18 18:55:12 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,23 +76,25 @@ int	check_map(char **map, int line, int count, char *allowed)
 	i = 0;
 	if (line == 0 || map[line + 1] == NULL || count == 0
 		|| (count + 1) >= (int)ft_strlen(map[line]))
-		return (error_msg(ERR_OPEN_MAP), 1);
+		return (1);
+	if (ft_strchr("NSEW", map[line][count]))
+		allowed = "01NSEW ";
 	while (allowed[i] != '\0' && map[line - 1][count] != allowed[i])
 		i++;
 	if (check_help(&i, allowed))
-		return (error_msg(ERR_OPEN_MAP), 1);
+		return (1);
 	while (allowed[i] != '\0' && map[line + 1][count] != allowed[i])
 		i++;
 	if (check_help(&i, allowed))
-		return (error_msg(ERR_OPEN_MAP), 1);
+		return (1);
 	while (allowed[i] != '\0' && map[line][count - 1] != allowed[i])
 		i++;
 	if (check_help(&i, allowed))
-		return (error_msg(ERR_OPEN_MAP), 1);
+		return (1);
 	while (allowed[i] != '\0' && map[line][count + 1] != allowed[i])
 		i++;
 	if (allowed[i] == '\0')
-		return (error_msg(ERR_OPEN_MAP), 1);
+		return (1);
 	return (0);
 }
 
@@ -102,7 +104,7 @@ char	**get_map(char *line, int fd, int i)
 
 	map = (char **)malloc(sizeof(char *));
 	if (!map)
-		return (error_msg(MALLOC), NULL);
+		return (error_msg(MALLOC), free(line), NULL);
 	while (line)
 	{
 		map = ft_realloc(map, (i + 1) * sizeof(char *),
@@ -110,12 +112,13 @@ char	**get_map(char *line, int fd, int i)
 		if (!map)
 			return (error_msg(MALLOC), free(line), NULL);
 		if (is_white(line) && !ft_strchr(line, ' '))
-			return (error_msg(ERR_NEWLINE_MAP), free_mtx((void **)map), NULL);
+			return (free(line), error_msg(ERR_NEWLINE_MAP),
+				free_map(map), NULL);
 		map[i++] = trim_back_nl(line);
 		line = get_next_line(fd);
 	}
 	map[i] = NULL;
 	if (parsing_map(map, 0, 0) == 1)
-		return (free_mtx((void **)map), NULL);
+		return (error_msg(ERR_OPEN_MAP), free_map(map), NULL);
 	return (map);
 }

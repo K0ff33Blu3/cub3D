@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 17:56:49 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/18 18:51:25 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	walls_ceiling(char *line, int fd, t_map *m_map)
 		if (result == 1)
 			return (free(start), 1);
 		if (result == 2)
-			return (free(start), 0);
+			return (0);
 		free(start);
 		line = get_next_line(fd);
 	}
