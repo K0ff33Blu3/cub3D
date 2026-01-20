@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 22:33:29 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/19 23:05:04 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
+
+
 
 // ERROR
 
@@ -121,6 +123,7 @@ typedef	struct s_ray
 	t_tile	tile_mov;
 	double	wall_dist;
 	t_column	column;
+	t_vect	hitpoint;
 		// t_tile	step;
 }	t_ray;
 
@@ -134,7 +137,7 @@ typedef struct s_player
 
 typedef	struct s_map
 {
-	char **map_skeleton;
+	char **skeleton;
 	char	*NO_text_path;
 	char	*SO_text_path;
 	char	*EA_text_path;
@@ -143,8 +146,8 @@ typedef	struct s_map
 	int		floor_hex;
 	int		ceiling_rgb[3];
 	int		ceiling_hex;
-	int		map_width;
-	int		map_height;
+	int		width;
+	int		height;
 	t_player	*player;
 	
 }	t_map;
@@ -173,8 +176,6 @@ int		on_keypress(int keycode, t_game *game);
 
 void	render_frame(t_game *game);
 
-t_map	*hardcoded_map();
-
 void	print_vect(t_vect vect);
 void	print_player(t_player player);
 void	print_map(t_map map);
@@ -189,8 +190,11 @@ t_vect	get_ray_direction(t_player player, double camera_x);
 t_tile	cast_vect2tile(t_vect vect);
 t_vect	get_side_distance(t_vect pos, t_ray *ray);
 t_ray	*init_raycasting(t_player *player, double x);
-double	DDA_loop(t_map map, t_ray *ray);
+t_vect	DDA_loop(t_map map, t_ray *ray);
 void	render_frame(t_game *game);
 void	putpixel(t_game game, int x, int y, int color);
+
+#include "hardcoded.h"
+
 
 #endif

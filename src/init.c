@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:22:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/18 21:29:58 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/19 23:03:03 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ t_game	*init_game(void)
 	game->mlx_win = mlx_new_window(game->mlx, WID, LEN, "cub3D");
 	game->mlx_img = mlx_new_image(game->mlx, WID, LEN);
 	game->mlx_img_addr = mlx_get_data_addr(game->mlx_img, &game->bits_per_pixel, &game->line_len, &game->endian);
-	game->map = hardcoded_map();
+	game->map = load_hardcoded();
 	return (game);
 }

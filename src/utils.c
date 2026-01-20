@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:06:21 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/18 22:33:12 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/19 23:02:51 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void	print_map(t_map map)
 	int	i;
 
 	i = 0;
-	while (i < map.map_height)
+	while (i < map.height)
 	{
-		printf("%s\n", map.map_skeleton[i]);
+		printf("%s\n", map.skeleton[i]);
 		i++;
 	}
 	printf("NO_text_path: %s\n", map.NO_text_path);
@@ -93,8 +93,8 @@ void	print_map(t_map map)
 	printf("WE_text_path: %s\n", map.WE_text_path);
 	printf("floor RGB: [ %d, %d, %d ]\n", map.floor_rgb[0], map.floor_rgb[1], map.floor_rgb[2]);
 	printf("ceiling RGB: [ %d, %d, %d ]\n", map.ceiling_rgb[0], map.ceiling_rgb[1], map.ceiling_rgb[2]);
-	printf("map_width: %d\n", map.map_width);
-	printf("map_height: %d\n", map.map_height);
+	printf("map_width: %d\n", map.width);
+	printf("map_height: %d\n", map.height);
 	print_player(*map.player);
 }
 /*

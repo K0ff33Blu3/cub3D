@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/18 22:34:33 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/19 23:02:36 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,34 +109,42 @@ t_side	get_side(t_vect dir, bool side)
 			return (SO);
 }
 
-double	DDA_loop(t_map map, t_ray *ray)
+t_vect	DDA_loop(t_map map, t_ray *ray)
 {
 	bool	hit;
-	double	tile_dist;
+	t_vect	hitpoint;
 	
 	hit = false;
-	print_ray(*ray);
 	while (hit == false)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
-			tile_dist = ray->side_dist.x;
+			ray->wall_dist = ray->side_dist.x;
 			ray->side_dist.x += ray->delta_dist.x;
 			ray->tile_pos.x += ray->tile_mov.x;
 			ray->tile_side = get_side(ray->dir, true);
 		}
 		else
 		{
-			tile_dist = ray->side_dist.y;
+			ray->wall_dist = ray->side_dist.y;
 			ray->side_dist.y += ray->delta_dist.y;
 			ray->tile_pos.y += ray->tile_mov.y;
 			ray->tile_side = get_side(ray->dir, false);
 		}
-		if (map.map_skeleton[ray->tile_pos.y][ray->tile_pos.x] == '1')
+		if (map.skeleton[ray->tile_pos.y][ray->tile_pos.x] == '1')
 			hit = true;
-		print_ray(*ray);
 	}
-	return (tile_dist);
+	if (ray->tile_side == NO || ray->tile_side == SO)
+	{
+		hitpoint.y = ray->tile_pos.y + (1 - ray->tile_mov.y) / 2;
+		hitpoint.x = map.player->pos.x + ((hitpoint.y - map.player->pos.y) / ray->dir.y) * ray->dir.x;
+	}
+	else
+	{
+		hitpoint.x = ray->tile_pos.x + (1 - ray->tile_mov.x) / 2;
+		hitpoint.y = map.player->pos.y + ((hitpoint.x - map.player->pos.x) / ray->dir.x) * ray->dir.y;
+	}
+	return (hitpoint);
 }
 
 t_column	get_draw_points(double wall_dist)
@@ -161,11 +169,25 @@ void	put_column(t_game game, t_ray ray, int x)
 	while (i < ray.column.draw_start)
 		putpixel(game, x, i++, game.map->ceiling_hex);
 	i++;
+	// printf("%d\n", ray.tile_side);
 	while (i < ray.column.draw_end)
-		putpixel(game, x, i++, 0xff00ff);
+		if (ray.tile_side == NO || ray.tile_side == EA)
+			putpixel(game, x, i++, 0x000000);
+		else
+			putpixel(game, x, i++, 0xff00ff);
 	i++;
 	while (i < LEN)
 		putpixel(game, x, i++, game.map->floor_hex);
+}
+
+double	get_distance(t_vect	origin, t_vect endpoint)
+{
+	double	x_dist;
+	double	y_dist;
+	
+	x_dist = endpoint.x - origin.x;
+	y_dist = endpoint.y - origin.y;
+	return (sqrt(pow(x_dist, 2) + pow(y_dist, 2)));
 }
 
 void	render_frame(t_game *game)
@@ -174,11 +196,10 @@ void	render_frame(t_game *game)
 	t_ray	*ray;
 	
 	x = 0;
-	print_map(*game->map);
 	while (x < WID)
 	{
 		ray = init_raycasting(game->map->player, x);
-		ray->wall_dist = DDA_loop(*game->map, ray);
+		ray->hitpoint = DDA_loop(*game->map, ray);
 		ray->column = get_draw_points(ray->wall_dist);
 		put_column(*game, *ray, x);
 		x++;		
