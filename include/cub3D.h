@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/19 23:05:04 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/20 21:21:50 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ in scene description file"
 #define ERR_ONLINE "online setup failed"
 #define ERR_IP_FORMAT "wrong IP format"
 #define ERR_MALLOC "malloc failure"
+
+#define MOV	0.5
 
 
 typedef	enum e_side

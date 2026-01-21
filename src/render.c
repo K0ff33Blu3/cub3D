@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/19 23:02:36 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/20 21:16:17 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void	put_column(t_game game, t_ray ray, int x)
 	// printf("%d\n", ray.tile_side);
 	while (i < ray.column.draw_end)
 		if (ray.tile_side == NO || ray.tile_side == EA)
-			putpixel(game, x, i++, 0x000000);
+			putpixel(game, x, i++, 0xb814b8);
 		else
 			putpixel(game, x, i++, 0xff00ff);
 	i++;
