@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 13:47:11 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 16:14:35 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 // SCREEN
 
-# define WID	1920
-# define LEN	1080
+# define WID	600
+# define LEN	400
 
 // KEYLOG
 
@@ -68,16 +68,16 @@
 # define BAD_CHAR "	invalid character"
 # define ERR_CHAR_FILE "	invalid character in scene description file"
 # define MALLOC "	malloc failure"
-# define ERR_MALLOC "malloc failure"
-# define ERR_SPACE_END_PATH " trim chars at end of wall path"
-# define ERR_WALL_REPEAT " wall is repeated in scene description file"
-# define ERR_FC_MISS " floor or ceiling is missing in scene description file"
+# define ERR_MALLOC "	malloc failure"
+# define ERR_SPACE_END_PATH "	trim chars at end of wall path"
+# define ERR_WALL_REPEAT "	wall is repeated in scene description file"
+# define ERR_FC_MISS "	floor or ceiling is missing in scene description file"
 # define ERR_WALL_MISS "	wall is missing in scene description file"
-# define ERR_FC_REPEAT " floor or ceiling is repeated in scene description file"
+# define ERR_FC_REPEAT "	floor or ceiling is repeated in scene description file"
 # define ERR_FC_FORMAT "	color format invalid"
 # define ERR_FC_BOUNDS "	color value out of bounds"
 
-# define MOV	0.5
+# define MOV	1.31
 # define FOV	70.0
 
 
@@ -188,8 +188,9 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 void	error_msg(char *msg);
 void	error_msg2(char *msg, char print_char);
+char	**handle_map_error(char **map, int result);
 
-	// parsing map
+// parsing map
 
 int		parsing_map(char **map, int line, int c);
 int		check_help(int *i, char *allowed);
@@ -204,13 +205,19 @@ int		is_file_type(const char *file, const char *type);
 int		ft_mapchr(char *str, const char *map);
 int		check_s_wall(char *line, char **wall);
 
-// parsing.c
+// parsing
 
-int		parse_rgb(char *str, int *rgb, bool *is_set);
+int		parse_rgb(char *str, int *hex, bool *is_set);
 int		floor_celling(char *line, t_map *m_map);
 int		walls_ceiling_map(char *line, char *start, t_map *m_map);
 int		walls_ceiling(char *line, int fd, t_map *m_map);
 int		parsing(const char *path, t_map *m_map);
+
+// one_player
+
+int player_count(const char *str, const char *set);
+int mapset_count(char **mtx, const char *set);
+int just_one_player(char **map);
 
 void print_map(t_map map);
 

@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 12:41:14 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 15:53:16 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "cub3D.h"
 
-int	parse_rgb(char *str, int *rgb, bool *is_set)
+int	parse_rgb(char *str, int *hex, bool *is_set)
 {
 	char	**values;
 	int		i;
+	int		rgb[3];
 
 	if (*is_set == true)
 		return (error_msg(ERR_FC_REPEAT), 1);
@@ -35,6 +36,7 @@ int	parse_rgb(char *str, int *rgb, bool *is_set)
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255
 		|| rgb[2] < 0 || rgb[2] > 255)
 		return (error_msg(ERR_FC_BOUNDS), 1);
+	*hex = rgb_to_hex(rgb);
 	*is_set = true;
 	return (0);
 }
@@ -47,9 +49,9 @@ int	floor_celling(char *line, t_map *m_map)
 	while (line[i] == ' ')
 		i++;
 	if (ft_strncmp(line, "F ", 2) == 0)
-		return (parse_rgb(&line[i], m_map->floor_rgb, &m_map->floor_set));
+		return (parse_rgb(&line[i], &m_map->floor_hex, &m_map->floor_set));
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		return (parse_rgb(&line[i], m_map->ceiling_rgb, &m_map->ceiling_set));
+		return (parse_rgb(&line[i], &m_map->ceiling_hex, &m_map->ceiling_set));
 	return (0);
 }
 

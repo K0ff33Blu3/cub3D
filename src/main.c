@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:59:27 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/23 13:37:05 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 15:17:38 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	main(int argc, char **argv)
 		free(m_map.so_text_path);
 		free(m_map.ea_text_path);
 		free(m_map.we_text_path);
-		ft_free((void **)m_map.skeleton, -1);
+		if (m_map.skeleton)
+			ft_free((void **)m_map.skeleton, -1);
 		return (1);
 	}
 	game = init_game();
