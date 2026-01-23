@@ -6,18 +6,18 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 18:51:25 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/23 11:37:36 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-int	parse_rgb(char *str, int *rgb, int *is_set)
+int	parse_rgb(char *str, int *rgb, bool *is_set)
 {
 	char	**values;
 	int		i;
 
-	if (*is_set == 1)
+	if (*is_set == true)
 		return (error_msg(ERR_FC_REPEAT), 1);
 	values = ft_split(str, ',');
 	if (!values)
@@ -35,7 +35,7 @@ int	parse_rgb(char *str, int *rgb, int *is_set)
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255
 		|| rgb[2] < 0 || rgb[2] > 255)
 		return (error_msg(ERR_FC_BOUNDS), 1);
-	*is_set = 1;
+	*is_set = true;
 	return (0);
 }
 

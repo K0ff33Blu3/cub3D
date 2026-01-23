@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 18:56:54 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/23 11:38:27 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # include <math.h>
 # include <sys/time.h>
 # include <X11/X.h>
+# include <stdbool.h>
 
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
@@ -94,8 +95,8 @@ typedef struct s_map
 	char		*we_text_path;
 	int			floor_rgb[3];
 	int			ceiling_rgb[3];
-	int			floor_set;
-	int			ceiling_set;
+	bool		floor_set;
+	bool		ceiling_set;
 	int			map_width;
 	int			map_height;
 	t_player	*player;
@@ -152,10 +153,12 @@ int		check_s_wall(char *line, char **wall);
 
 // parsing.c
 
-int		parse_rgb(char *str, int *rgb, int *is_set);
+int		parse_rgb(char *str, int *rgb, bool *is_set);
 int		floor_celling(char *line, t_map *m_map);
 int		walls_ceiling_map(char *line, char *start, t_map *m_map);
 int		walls_ceiling(char *line, int fd, t_map *m_map);
 int		parsing(const char *path, t_map *m_map);
+
+void print_map(t_map map);
 
 #endif
