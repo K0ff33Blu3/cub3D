@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 12:43:00 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 13:47:11 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@
 # define ERR_FC_FORMAT "	color format invalid"
 # define ERR_FC_BOUNDS "	color value out of bounds"
 
-#define MOV	0.5
+# define MOV	0.5
+# define FOV	70.0
 
 
 typedef	enum e_side
@@ -128,7 +129,7 @@ typedef struct s_player
 {
 	t_vect	pos;
 	t_vect	dir;
-	t_vect	plane;
+	t_vect	camera;
 
 }	t_player;
 
@@ -169,6 +170,7 @@ int		close_display(t_game *game);
 // init.c
 
 t_game	*init_game(void);
+t_player	*init_player(t_map map);
 
 // events.c
 
@@ -231,6 +233,10 @@ t_ray	*init_raycasting(t_player *player, double x);
 t_vect	DDA_loop(t_map map, t_ray *ray);
 void	render_frame(t_game *game);
 void	putpixel(t_game game, int x, int y, int color);
+
+t_vect get_player_camera(t_vect dir);
+t_vect	get_player_dir(char **map, t_vect pos);
+t_vect get_player_pos(char **map);
 
 #include "hardcoded.h"
 

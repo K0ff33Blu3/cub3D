@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 22:51:45 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/23 12:31:37 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 13:09:56 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ t_map	*load_hardcoded()
 		map->skeleton[i] = ft_strdup((char *)hardcoded_map[i]);
 		i++;
 	}
-	map->NO_text_path = NO_TEXT;
-	map->EA_text_path = EA_TEXT;
-	map->SO_text_path = SO_TEXT;
-	map->WE_text_path = WE_TEXT;
+	map->no_text_path = NO_TEXT;
+	map->ea_text_path = EA_TEXT;
+	map->so_text_path = SO_TEXT;
+	map->we_text_path = WE_TEXT;
 	memset(map->floor_rgb, 0, sizeof(int) * 3);
 	memset(map->ceiling_rgb, 0, sizeof(int) * 3);
 	map->floor_hex = FLOOR_HEX;
@@ -40,8 +40,8 @@ t_map	*load_hardcoded()
 	map->player->pos.y = PLAYER_POS_Y;
 	map->player->dir.x = PLAYER_DIR_X;
 	map->player->dir.y = PLAYER_DIR_Y;
-	map->player->plane.x = PLAYER_PLANE_X;
-	map->player->plane.y = PLAYER_PLANE_Y;
+	map->player->camera.x = PLAYER_CAMERA_X;
+	map->player->camera.y = PLAYER_CAMERA_Y;
 	
 	return (map);
 }

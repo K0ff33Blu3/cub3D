@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:22:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/23 12:32:24 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 13:46:31 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,17 @@ t_game	*init_game(void)
 	game->mlx_img_addr = mlx_get_data_addr(game->mlx_img, &game->bits_per_pixel, &game->line_len, &game->endian);
 	game->map = load_hardcoded();
 	return (game);
+}
+
+t_player	*init_player(t_map map)
+{
+	t_player *player;
+
+	player = (t_player *)malloc(sizeof(t_player));
+	if (!player)
+		return (NULL);
+	player->pos = get_player_pos(map.skeleton);
+	player->dir = get_player_dir(map.skeleton, player->pos);
+	player->camera = get_player_camera(player->dir);
+	return (player);
 }

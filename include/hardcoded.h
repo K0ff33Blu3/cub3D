@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 22:35:55 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/20 21:06:09 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 13:10:13 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #define	PLAYER_POS_Y 8.0
 #define PLAYER_DIR_X -1.0
 #define	PLAYER_DIR_Y 0.0
-#define	PLAYER_PLANE_X 0.0
-#define	PLAYER_PLANE_Y -1.0
+#define	PLAYER_CAMERA_X 0.0
+#define	PLAYER_CAMERA_Y -1.0
 
 #define	FLOOR_HEX	0x000000
 #define	CEILING_HEX	0xFFFFFF

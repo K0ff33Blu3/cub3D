@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/23 12:32:46 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 13:12:43 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ t_vect	get_ray_direction(t_player player, double camera_x)
 {
 	t_vect	dir;
 	
-	dir.x = player.dir.x + camera_x * player.plane.x;
-	dir.y = player.dir.y + camera_x * player.plane.y;
+	dir.x = player.dir.x + camera_x * player.camera.x;
+	dir.y = player.dir.y + camera_x * player.camera.y;
 	return (dir);
 }
 
