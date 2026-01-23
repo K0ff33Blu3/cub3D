@@ -3,39 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   hardcoded.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/18 18:56:14 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 18:56:15 by elmondo          ###   ########.fr       */
+/*   Created: 2026/01/19 22:51:45 by miricci           #+#    #+#             */
+/*   Updated: 2026/01/23 12:31:37 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "cub3D.h"
+#include "cub3D.h"
+#include "hardcoded.h"
 
-// t_map	*hardcoded_map()
-// {
-// 	t_map	*map;
-
-// 	map = (t_map *)malloc(sizeof(t_map));	
-// 	map->map_skeleton[0] = "111111";
-// 	map->map_skeleton[1] = "100101";
-// 	map->map_skeleton[2] = "101001";
-// 	map->map_skeleton[3] = "1100N1";
-// 	map->map_skeleton[4] = "111111";
-// 	map->map_width = 6;
-// 	map->map_height = 5;
-// 	map->ceiling_rgb[0] = 220;
-// 	map->ceiling_rgb[1] = 100; 
-// 	map->ceiling_rgb[2] = 0; 
-// 	map->floor_rgb[0] = 220;
-// 	map->floor_rgb[1] = 100; 
-// 	map->floor_rgb[2] = 0;
-// 	map->NO_text_path = "./textures/BrickWall.png";
-// 	map->EA_text_path = "./textures/BrickWall.png";
-// 	map->SO_text_path = "./textures/BrickWall.png";
-// 	map->WE_text_path = "./textures/BrickWall.png";
-// 	map->player->dir.x = 0;
-// 	map->player->dir.y = -1;
-// 	map->player->plane.x = 0.66;
-// 	map->player->plane.y = 0;
-// }
+t_map	*load_hardcoded()
+{
+	t_map	*map;
+	
+	map = (t_map *)malloc(sizeof(t_map));
+	map->width = MAP_WID;
+	map->height = MAP_HGT;
+	int i = 0;
+	map->skeleton = (char **)malloc(sizeof(char *) * MAP_HGT);
+	while (i < MAP_HGT)
+	{
+		map->skeleton[i] = ft_strdup((char *)hardcoded_map[i]);
+		i++;
+	}
+	map->NO_text_path = NO_TEXT;
+	map->EA_text_path = EA_TEXT;
+	map->SO_text_path = SO_TEXT;
+	map->WE_text_path = WE_TEXT;
+	memset(map->floor_rgb, 0, sizeof(int) * 3);
+	memset(map->ceiling_rgb, 0, sizeof(int) * 3);
+	map->floor_hex = FLOOR_HEX;
+	map->ceiling_hex = CEILING_HEX;
+	map->player = (t_player *)malloc(sizeof(t_player));
+	map->player->pos.x = PLAYER_POS_X;
+	map->player->pos.y = PLAYER_POS_Y;
+	map->player->dir.x = PLAYER_DIR_X;
+	map->player->dir.y = PLAYER_DIR_Y;
+	map->player->plane.x = PLAYER_PLANE_X;
+	map->player->plane.y = PLAYER_PLANE_Y;
+	
+	return (map);
+}

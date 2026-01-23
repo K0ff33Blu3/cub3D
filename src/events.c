@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:27:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/18 10:42:32 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/23 12:30:36 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,19 @@ void	handle_events(t_game *game)
 	mlx_hook(game->mlx_win, DestroyNotify, NoEventMask, close_display, game);
 }
 
+void	move_forward(t_map map, t_player *player)
+{
+	(void)map;
+	player->pos.x = player->dir.x * MOV;
+}
+
 int	on_keypress(int keycode, t_game *game)
 {
 	if (keycode == XK_Escape)
 		close_display(game);
+	if (keycode == W)
+	{
+		move_forward(*game->map, game->map->player);
+	}
 	return (0);
 }
