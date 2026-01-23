@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 12:39:28 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 12:41:14 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	parse_rgb(char *str, int *rgb, bool *is_set)
 		i++;
 	if (i != 3 || !check_rgb_format(values[0]) || !check_rgb_format(values[1])
 		|| !check_rgb_format(values[2]))
-		return (free_mtx((void **)values), error_msg(ERR_FC_FORMAT), 1);
+		return (ft_free((void **)values, -1), error_msg(ERR_FC_FORMAT), 1);
 	rgb[0] = ft_atoi(values[0]);
 	rgb[1] = ft_atoi(values[1]);
 	rgb[2] = ft_atoi(values[2]);
-	free_mtx((void **)values);
+	ft_free((void **)values, -1);
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255
 		|| rgb[2] < 0 || rgb[2] > 255)
 		return (error_msg(ERR_FC_BOUNDS), 1);

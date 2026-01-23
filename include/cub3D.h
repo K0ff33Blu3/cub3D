@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 12:29:25 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 12:43:00 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,14 +180,12 @@ int		on_keypress(int keycode, t_game *game);
 char	*trim_back_nl(char *str);
 int		skip_spaces(char *line, int count);
 int		is_white(char *line);
-void	free_mtx(void **mtx);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 // error
 
 void	error_msg(char *msg);
 void	error_msg2(char *msg, char print_char);
-void	free_map(char **map);
 
 	// parsing map
 

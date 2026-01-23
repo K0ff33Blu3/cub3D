@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilsline.c                                        :+:      :+:    :+:   */
+/*   utils_mine.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 11:03:52 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 16:47:22 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/23 12:41:37 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,6 @@ int	is_white(char *line)
 		count++;
 	}
 	return (1);
-}
-
-void	free_mtx(void **mtx)
-{
-	int	i;
-
-	if (!mtx)
-		return ;
-	i = 0;
-	while (mtx[i])
-	{
-		free(mtx[i]);
-		i++;
-	}
-	free(mtx);
 }
 
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
