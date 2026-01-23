@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 11:37:36 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/01/23 12:39:28 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,6 @@ int	parsing(const char *path, t_map *m_map)
 	map = get_map(m_map->tmp_line, fd, 0);
 	if (map == NULL)
 		return (1);
-	m_map->map_skeleton = map;
+	m_map->skeleton = map;
 	return (0);
 }

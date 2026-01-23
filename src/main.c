@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:59:27 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/23 12:32:33 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 12:39:28 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 		free(m_map.so_text_path);
 		free(m_map.ea_text_path);
 		free(m_map.we_text_path);
-		free_mtx((void **)m_map.map_skeleton);
+		free_mtx((void **)m_map.skeleton);
 		return (1);
 	}
 	game = init_game();
