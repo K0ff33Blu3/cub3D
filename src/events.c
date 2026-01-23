@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:27:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/20 21:22:05 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 11:53:38 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	handle_events(t_game *game)
 
 void	move_forward(t_map map, t_player *player)
 {
+	(void)map;
 	player->pos.x = player->dir.x * MOV;
 }
 
