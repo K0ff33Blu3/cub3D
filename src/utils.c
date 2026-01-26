@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:06:21 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/23 13:31:12 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/25 12:22:21 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	rgb_to_hex(int rgb[3])
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
-void	putpixel(t_game game, int x, int y, int color)
+void	putpixel(t_image *img, int x, int y, int color)
 {
 	int	*offset;
 	int	index;
 	int	pixels_per_line;
 
-	pixels_per_line = game.line_len / 4;
-	offset = (int *)game.mlx_img_addr;
+	pixels_per_line = img->line_len / 4;
+	offset = (int *)img->addr;
 	index = y * pixels_per_line + x;
 	offset[index] = color;
 }
@@ -82,7 +82,7 @@ void	print_map(t_map map)
 	int	i;
 
 	i = 0;
-	while (i < map.height)
+	while (map.skeleton[i])
 	{
 		printf("%s\n", map.skeleton[i]);
 		i++;
@@ -93,8 +93,8 @@ void	print_map(t_map map)
 	printf("WE_text_path: %s\n", map.we_text_path);
 	printf("floor RGB: [ %d, %d, %d ]\n", map.floor_rgb[0], map.floor_rgb[1], map.floor_rgb[2]);
 	printf("ceiling RGB: [ %d, %d, %d ]\n", map.ceiling_rgb[0], map.ceiling_rgb[1], map.ceiling_rgb[2]);
-	printf("map_width: %d\n", map.width);
-	printf("map_height: %d\n", map.height);
+	// printf("map_width: %d\n", map.width);
+	// printf("map_height: %d\n", map.height);
 	print_player(*map.player);
 }
 /*
@@ -102,6 +102,6 @@ void	print_map(t_map map)
 */
 void	print_game(t_game game)
 {
-	printf("mlx: %p\nmlx_win: %p\n", game.mlx, game.mlx_win);
+	printf("mlx: %p\nmlx_win: %p\n", game.mlx, game.win);
 	print_map(*game.map);
 }

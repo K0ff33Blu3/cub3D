@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/23 13:12:43 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/25 20:49:12 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ t_tile	cast_vect2tile(t_vect vect)
 {
 	t_tile	tile;
 
-	tile.x = (int)vect.x;
-	tile.y = (int)vect.y;
+	tile.x = floor(vect.x);
+	tile.y = floor(vect.y);
 	return (tile);
 }
 
@@ -147,47 +147,73 @@ t_vect	DDA_loop(t_map map, t_ray *ray)
 	return (hitpoint);
 }
 
-t_column	get_draw_points(double wall_dist)
+unsigned int tex_get_pixel(t_image *tex, int x, int y)
+{
+	unsigned int	pos;
+	
+	// printf("y = %d\n", y);
+	pos = y * tex->line_len + x * (tex->bpp / 8);
+	return (*(unsigned int *)(tex->addr + pos));
+}
+
+void	put_column(t_game *game, t_column *col, int x)
+{
+	int	i;
+
+	i = -1;
+	printf("tex pos x: %f\n", col->tex_pos.x);
+	while (++i < col->draw_start)
+		putpixel(game->img, x, i, 0xffffff);
+	while (++i < col->draw_end)
+	{
+		putpixel(game->img, x, i, tex_get_pixel(col->tex, col->tex_pos.x, col->tex_pos.y));
+		col->tex_pos.y +=  1.0 * col->delta_tex;
+	}
+	while (++i < LEN)
+		putpixel(game->img, x, i, 0x000000);
+}
+
+double	get_wall_x(int side, t_vect hitpoint)
+{
+	double	wall_x;
+
+	if (side == WE || side == EA)
+		wall_x = hitpoint.y;
+	else
+		wall_x = hitpoint.x;
+	wall_x -= floor(wall_x);
+	return(wall_x);
+}
+
+t_column	get_column(t_ray *ray)
 {
 	t_column	col;
 	
-	col.line_height = LEN / wall_dist;
+	col.line_height = LEN / ray->wall_dist;
 	col.draw_start = LEN / 2 - col.line_height / 2;
 	if (col.draw_start < 0)
 		col.draw_start = 0;
 	col.draw_end = col.line_height / 2 + LEN / 2;
 	if (col.draw_end >= LEN)
 		col.draw_end = LEN - 1;
+	col.wall_x = get_wall_x(ray->tile_side, ray->hitpoint);
+	col.wall_side = ray->tile_side;
 	return (col);
 }
 
-void	put_column(t_game game, t_ray ray, int x)
+void	set_tex_to_col(t_game *game, t_column *col)
 {
-	int	i;
-
-	i = 0;
-	while (i < ray.column.draw_start)
-		putpixel(game, x, i++, game.map->ceiling_hex);
-	i++;
-	// printf("%d\n", ray.tile_side);
-	while (i < ray.column.draw_end)
-		if (ray.tile_side == NO || ray.tile_side == EA)
-			putpixel(game, x, i++, 0xb814b8);
-		else
-			putpixel(game, x, i++, 0xff00ff);
-	i++;
-	while (i < LEN)
-		putpixel(game, x, i++, game.map->floor_hex);
-}
-
-double	get_distance(t_vect	origin, t_vect endpoint)
-{
-	double	x_dist;
-	double	y_dist;
-	
-	x_dist = endpoint.x - origin.x;
-	y_dist = endpoint.y - origin.y;
-	return (sqrt(pow(x_dist, 2) + pow(y_dist, 2)));
+	if (col->wall_side == NO)
+		col->tex = game->tex + NO;
+	else if (col->wall_side == EA)
+		col->tex = game->tex + EA;
+	else if (col->wall_side == SO)
+		col->tex = game->tex + SO;
+	else if (col->wall_side == WE)
+		col->tex = game->tex + WE;
+	col->delta_tex = (double)col->tex->height / col->line_height;
+	col->tex_pos.x = floor(col->wall_x * col->tex->width);
+	col->tex_pos.y = 0;
 }
 
 void	render_frame(t_game *game)
@@ -200,9 +226,10 @@ void	render_frame(t_game *game)
 	{
 		ray = init_raycasting(game->map->player, x);
 		ray->hitpoint = DDA_loop(*game->map, ray);
-		ray->column = get_draw_points(ray->wall_dist);
-		put_column(*game, *ray, x);
+		ray->column = get_column(ray);
+		set_tex_to_col(game, &ray->column);
+		put_column(game, &ray->column, x);
 		x++;		
 	}
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mlx_img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->img->img, 0, 0);
 }

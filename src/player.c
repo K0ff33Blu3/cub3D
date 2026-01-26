@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 13:36:35 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/23 13:46:27 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/23 18:03:29 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,16 @@ t_vect	get_player_dir(char **map, t_vect pos)
 	return (dir);
 }
 
+double	deg_to_rad(double deg)
+{
+	return ((deg / 180.0) * M_PI);
+}
+
 t_vect get_player_camera(t_vect dir)
 {
 	t_vect camera;
-
-	camera.x = tan(FOV / 2) * dir.y;
-	camera.y = tan(FOV / 2) * dir.x;
+	
+	camera.x = tan(deg_to_rad(FOV / 2)) * dir.y;
+	camera.y = -tan(deg_to_rad(FOV / 2)) * dir.x;
 	return (camera);
 }

@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 13:47:11 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/25 14:30:57 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define LSHIFT 65505
 # define LALT 65513
 
+
 // INCLUDE
 
 # include <stdlib.h>
@@ -41,17 +42,22 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
-# include <math.h>
 # include <sys/time.h>
 # include <X11/X.h>
 # include <stdbool.h>
 # include <limits.h>
 # include <float.h>
 # include <stdbool.h>
+# include <math.h>
+
 
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
+
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 
 
@@ -77,8 +83,9 @@
 # define ERR_FC_FORMAT "	color format invalid"
 # define ERR_FC_BOUNDS "	color value out of bounds"
 
-# define MOV	0.5
+# define MOV	0.1
 # define FOV	70.0
+# define ROT	0.1
 
 
 typedef	enum e_side
@@ -88,6 +95,17 @@ typedef	enum e_side
 	SO = 2,
 	WE = 3,
 } t_side;
+
+typedef struct s_image
+{
+    void    *img;
+    char    *addr;
+    int     width;
+    int     height;
+    int     bpp;
+    int     line_len;
+    int     endian;
+}	t_image;
 
 
 typedef struct s_vect
@@ -107,6 +125,11 @@ typedef	struct s_column
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	t_vect	tex_pos;
+	double	wall_x;
+	double	delta_tex;
+	int		wall_side;
+	t_image *tex;
 }	t_column;
 
 
@@ -146,8 +169,8 @@ typedef struct s_map
 	bool		floor_set;
 	bool		ceiling_set;
 	int			ceiling_hex;
-	int		width;
-	int			height;
+	// int		width;
+	// int			height;
 	t_player	*player;
 	char		*tmp_line;
 }	t_map;
@@ -155,13 +178,11 @@ typedef struct s_map
 typedef struct s_game
 {
 	void	*mlx;
-	void	*mlx_win;
-	void	*mlx_img;
-	char	*mlx_img_addr;
-	int		bits_per_pixel;
-	int		line_len;
-	int		endian;
+	t_image	*img;
+	void	*win;
 	t_map	*map;
+	t_image	*tex;
+	int	*texture;
 
 }	t_game;
 
@@ -169,8 +190,10 @@ int		close_display(t_game *game);
 
 // init.c
 
-t_game	*init_game(void);
+t_game	*init_game(t_map *map);
 t_player	*init_player(t_map map);
+t_image	*init_tex(t_game *game, t_map *map);
+
 
 // events.c
 
@@ -232,13 +255,13 @@ t_vect	get_side_distance(t_vect pos, t_ray *ray);
 t_ray	*init_raycasting(t_player *player, double x);
 t_vect	DDA_loop(t_map map, t_ray *ray);
 void	render_frame(t_game *game);
-void	putpixel(t_game game, int x, int y, int color);
+void	putpixel(t_image *img, int x, int y, int color);
 
 t_vect get_player_camera(t_vect dir);
 t_vect	get_player_dir(char **map, t_vect pos);
 t_vect get_player_pos(char **map);
 
-#include "hardcoded.h"
+# include "hardcoded.h"
 
 
 #endif
