@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/25 20:49:12 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/26 22:51:57 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,26 @@ t_side	get_side(t_vect dir, bool side)
 			return (SO);
 }
 
+t_vect	set_hitpoint(t_vect *player, t_ray *ray)
+{
+	t_vect	hitpoint;
+
+	if (ray->tile_side == NO || ray->tile_side == SO)
+	{
+		hitpoint.y = ray->tile_pos.y + (1 - ray->tile_mov.y) / 2;
+		hitpoint.x = player->x + ((hitpoint.y - player->y) / ray->dir.y) * ray->dir.x;
+	}
+	else
+	{
+		hitpoint.x = ray->tile_pos.x + (1 - ray->tile_mov.x) / 2;
+		hitpoint.y = player->y + ((hitpoint.x - player->x) / ray->dir.x) * ray->dir.y;
+	}
+	return (hitpoint);
+}
+
 t_vect	DDA_loop(t_map map, t_ray *ray)
 {
 	bool	hit;
-	t_vect	hitpoint;
 	
 	hit = false;
 	while (hit == false)
@@ -134,24 +150,13 @@ t_vect	DDA_loop(t_map map, t_ray *ray)
 		if (map.skeleton[ray->tile_pos.y][ray->tile_pos.x] == '1')
 			hit = true;
 	}
-	if (ray->tile_side == NO || ray->tile_side == SO)
-	{
-		hitpoint.y = ray->tile_pos.y + (1 - ray->tile_mov.y) / 2;
-		hitpoint.x = map.player->pos.x + ((hitpoint.y - map.player->pos.y) / ray->dir.y) * ray->dir.x;
-	}
-	else
-	{
-		hitpoint.x = ray->tile_pos.x + (1 - ray->tile_mov.x) / 2;
-		hitpoint.y = map.player->pos.y + ((hitpoint.x - map.player->pos.x) / ray->dir.x) * ray->dir.y;
-	}
-	return (hitpoint);
+	return (set_hitpoint(&map.player->pos, ray));
 }
 
 unsigned int tex_get_pixel(t_image *tex, int x, int y)
 {
 	unsigned int	pos;
 	
-	// printf("y = %d\n", y);
 	pos = y * tex->line_len + x * (tex->bpp / 8);
 	return (*(unsigned int *)(tex->addr + pos));
 }
@@ -161,16 +166,15 @@ void	put_column(t_game *game, t_column *col, int x)
 	int	i;
 
 	i = -1;
-	printf("tex pos x: %f\n", col->tex_pos.x);
 	while (++i < col->draw_start)
-		putpixel(game->img, x, i, 0xffffff);
+		putpixel(game->img, x, i, game->map->ceiling_hex);
 	while (++i < col->draw_end)
 	{
 		putpixel(game->img, x, i, tex_get_pixel(col->tex, col->tex_pos.x, col->tex_pos.y));
 		col->tex_pos.y +=  1.0 * col->delta_tex;
 	}
 	while (++i < LEN)
-		putpixel(game->img, x, i, 0x000000);
+		putpixel(game->img, x, i, game->map->floor_hex);
 }
 
 double	get_wall_x(int side, t_vect hitpoint)
@@ -213,7 +217,10 @@ void	set_tex_to_col(t_game *game, t_column *col)
 		col->tex = game->tex + WE;
 	col->delta_tex = (double)col->tex->height / col->line_height;
 	col->tex_pos.x = floor(col->wall_x * col->tex->width);
-	col->tex_pos.y = 0;
+	if (col->line_height < LEN)
+		col->tex_pos.y = 0;
+	else
+		col->tex_pos.y = floor(((col->line_height - LEN) / 2.0) *  col->delta_tex);
 }
 
 void	render_frame(t_game *game)
@@ -229,7 +236,8 @@ void	render_frame(t_game *game)
 		ray->column = get_column(ray);
 		set_tex_to_col(game, &ray->column);
 		put_column(game, &ray->column, x);
-		x++;		
+		free(ray);
+		x++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img->img, 0, 0);
 }

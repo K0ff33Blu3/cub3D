@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/25 14:30:57 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/26 22:53:05 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ typedef struct s_player
 	t_vect	pos;
 	t_vect	dir;
 	t_vect	camera;
-
+	
 }	t_player;
 
 typedef struct s_map
@@ -187,6 +187,7 @@ typedef struct s_game
 }	t_game;
 
 int		close_display(t_game *game);
+void	destroy_tex(t_image *tex, t_game *game);
 
 // init.c
 

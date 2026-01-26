@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:22:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/25 14:32:15 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/26 22:36:54 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_game	*init_game(t_map *map)
 		return (NULL);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WID, LEN, "cub3D");
-	game->img = (t_image *)ft_calloc(1, sizeof(t_image));
+	game->img = (t_image *)malloc(sizeof(t_image));
 	if (!game->img)
 		return (NULL);
 	game->img->img = mlx_new_image(game->mlx, WID, LEN);
