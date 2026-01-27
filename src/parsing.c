@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 12:41:14 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/27 13:23:21 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	parse_rgb(char *str, int *rgb, bool *is_set)
 	return (0);
 }
 
-int	floor_celling(char *line, t_map *m_map)
+int	floor_ceiling(char *line, t_map *m_map)
 {
 	int	i;
 
@@ -65,7 +65,7 @@ int	walls_ceiling_map(char *line, char *start, t_map *m_map)
 	else if ((ft_strncmp(line, "F ", 2) == 0)
 		|| (ft_strncmp(line, "C ", 2) == 0))
 	{
-		if (floor_celling(line, m_map))
+		if (floor_ceiling(line, m_map))
 			return (1);
 	}
 	else if (*line == '1' || *line == '0' || *line == 'N' || *line == 'S'

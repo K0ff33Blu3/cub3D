@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/26 22:53:05 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/27 14:27:47 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-
-
 // ERROR
 
 # define ERR_ARGS "	incorrect arguments number"
@@ -83,10 +81,20 @@
 # define ERR_FC_FORMAT "	color format invalid"
 # define ERR_FC_BOUNDS "	color value out of bounds"
 
-# define MOV	0.1
+# define MOV	0.05
 # define FOV	70.0
-# define ROT	0.1
+# define ROT	0.05
 
+typedef	struct s_keys
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+	bool	esc;
+}	t_keys;
 
 typedef	enum e_side
 {
@@ -169,8 +177,6 @@ typedef struct s_map
 	bool		floor_set;
 	bool		ceiling_set;
 	int			ceiling_hex;
-	// int		width;
-	// int			height;
 	t_player	*player;
 	char		*tmp_line;
 }	t_map;
@@ -183,38 +189,41 @@ typedef struct s_game
 	t_map	*map;
 	t_image	*tex;
 	int	*texture;
+	t_keys	k;
 
 }	t_game;
 
+//	cleaning.c
 int		close_display(t_game *game);
 void	destroy_tex(t_image *tex, t_game *game);
+void	destroy_map(t_map *map);
 
 // init.c
-
-t_game	*init_game(t_map *map);
+t_game		*init_game(t_map *map);
 t_player	*init_player(t_map map);
-t_image	*init_tex(t_game *game, t_map *map);
+t_image		*init_tex(t_game *game, t_map *map);
 
-
-// events.c
-
-void	handle_events(t_game *game);
-int		on_keypress(int keycode, t_game *game);
-
-// utils_mine.c
-
-char	*trim_back_nl(char *str);
-int		skip_spaces(char *line, int count);
-int		is_white(char *line);
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+//	DDA_loop.c
+t_vect	DDA_loop(t_map map, t_ray *ray);
 
 // error
-
 void	error_msg(char *msg);
 void	error_msg2(char *msg, char print_char);
 
-	// parsing map
+// events.c
+void	handle_events(t_game *game);
+int		on_keypress(int keycode, t_keys *k);
+int		on_keyrelease(int keycode, t_keys *k);
+int		loop_event(t_game *game);
 
+// utils.c
+char	*trim_back_nl(char *str);
+int		is_white(char *line);
+int	rgb_to_hex(int rgb[3]);
+t_tile	vect_to_tile(t_vect vect);
+double	deg_to_rad(double deg);
+
+// parsing map
 int		parsing_map(char **map, int line, int c);
 int		check_help(int *i, char *allowed);
 int		check_map(char **map, int line, int count, char *allowed);
@@ -222,24 +231,29 @@ int		walls_checker(char *line, t_map *m_map);
 char	**get_map(char *line, int fd, int i);
 
 // parsing_utils
-
 int		check_rgb_format(char *str);
 int		is_file_type(const char *file, const char *type);
 int		ft_mapchr(char *str, const char *map);
 int		check_s_wall(char *line, char **wall);
 
 // parsing.c
-
 int		parse_rgb(char *str, int *rgb, bool *is_set);
-int		floor_celling(char *line, t_map *m_map);
+int		floor_ceiling(char *line, t_map *m_map);
 int		walls_ceiling_map(char *line, char *start, t_map *m_map);
 int		walls_ceiling(char *line, int fd, t_map *m_map);
 int		parsing(const char *path, t_map *m_map);
 
-void print_map(t_map map);
+//	movement.c
+void	move_forward(t_map map, t_player *player);
+void	move_backward(t_map map, t_player *player);
+void	move_left(t_map map, t_player *player);
+void	move_right(t_map map, t_player *player);
+void	rotate(t_player *player, double angle);
+
 
 void	render_frame(t_game *game);
 
+void	print_map(t_map map);
 void	print_vect(t_vect vect);
 void	print_player(t_player player);
 void	print_map(t_map map);
@@ -249,20 +263,26 @@ void	print_ray(t_ray ray);
 int		rgb_to_hex(int rgb[3]);
 
 
-t_vect	get_delta_distance(t_vect dir);
-t_vect	get_ray_direction(t_player player, double camera_x);
-t_tile	cast_vect2tile(t_vect vect);
-t_vect	get_side_distance(t_vect pos, t_ray *ray);
 t_ray	*init_raycasting(t_player *player, double x);
 t_vect	DDA_loop(t_map map, t_ray *ray);
 void	render_frame(t_game *game);
 void	putpixel(t_image *img, int x, int y, int color);
 
-t_vect get_player_camera(t_vect dir);
-t_vect	get_player_dir(char **map, t_vect pos);
-t_vect get_player_pos(char **map);
+t_vect set_player_pos(char **map);
+t_vect	set_player_dir(char **map, t_vect pos);
+t_vect set_player_camera(t_vect dir);
 
-# include "hardcoded.h"
+void	load_tex_img(t_image *tex, t_game *game, t_map *map);
+void	get_tex_info(t_image *tex);
+void	set_tex_to_col(t_game *game, t_column *col);
+unsigned int tex_get_pixel(t_image *tex, int x, int y);
 
+// movements.c
+
+void	move_forward(t_map map, t_player *player);
+void	move_backward(t_map map, t_player *player);
+void	move_left(t_map map, t_player *player);
+void	move_right(t_map map, t_player *player);
+void	rotate(t_player *player, double angle);
 
 #endif

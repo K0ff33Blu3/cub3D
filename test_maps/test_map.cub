@@ -1,7 +1,7 @@
-NO ./textures/bricks_multicolor.xpm
-SO ./textures/brown_bricks.xpm
-WE ./textures/red_bricks.xpm
-EA ./textures/gray_bricks.xpm
+NO ./textures/35.xpm
+SO ./textures/39.xpm
+WE ./textures/44.xpm
+EA ./textures/45.xpm
 
 F 0,0,0
 
