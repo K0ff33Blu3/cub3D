@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/29 12:34:40 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/29 16:15:51 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@
 # define MOV	0.05
 # define FOV	70.0
 # define ROT	0.05
+# define FPS	60
 
 typedef	struct s_keys
 {

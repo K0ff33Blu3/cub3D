@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:27:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/27 13:27:05 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/29 17:09:34 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	on_keyrelease(int keycode, t_keys *k)
 }
 int	loop_event(t_game *game)
 {
+	
 	if (game->k.w == true)
 		move_forward(*game->map, game->map->player);
 	if (game->k.a == true)
