@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/28 16:26:31 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/29 12:39:17 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	render_frame(t_game *game)
 	t_ray	*ray;
 	
 	x = 0;
-	print_vect(game->map->player->pos);
 	while (x < WID)
 	{
 		ray = init_raycasting(game->map->player, x);
