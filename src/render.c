@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/27 13:21:36 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/28 16:26:31 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	putpixel(t_image *img, int x, int y, int color)
 	int	index;
 	int	pixels_per_line;
 	
+	if (x < 0 || x >= WID || y < 0 || y >= LEN)
+        return ;	
 	pixels_per_line = img->line_len / 4;
 	offset = (int *)img->addr;
 	index = y * pixels_per_line + x;
@@ -83,6 +85,7 @@ void	render_frame(t_game *game)
 	t_ray	*ray;
 	
 	x = 0;
+	print_vect(game->map->player->pos);
 	while (x < WID)
 	{
 		ray = init_raycasting(game->map->player, x);

@@ -6,45 +6,76 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 13:00:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/27 14:27:16 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/28 16:03:20 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+bool	is_walkable(t_map *map, double x, double y)
+{
+	t_tile grid;
+	int	map_width;
+	int	map_height;
+
+	grid.x = (int)x;
+	grid.y = (int)y;
+	map_width = ft_strlen(map->skeleton[grid.y]);
+	map_height = array_size((void **)map->skeleton);
+	if (grid.x < 0 || grid.y < 0 || grid.x >= map_width || grid.y >= map_height)
+		return (false);
+	return (map->skeleton[grid.y][grid.x] != '1');	
+}
+
 void	move_forward(t_map map, t_player *player)
 {
-	if (map.skeleton[(int)(player->pos.y + player->dir.y * MOV)][(int)(player->pos.x + player->dir.x * MOV)] != '1')
+	t_vect	new;
+
+	new.x = player->pos.x + player->dir.x * MOV;
+	new.y = player->pos.y + player->dir.y * MOV;
+	if (is_walkable(&map, new.x, new.y))
 	{
-		player->pos.x += player->dir.x * MOV;
-		player->pos.y += player->dir.y * MOV;
+		player->pos.x = new.x;
+		player->pos.y = new.y;
 	}
 }
 
 void	move_backward(t_map map, t_player *player)
 {
-	if (map.skeleton[(int)(player->pos.y + player->dir.y * MOV)][(int)(player->pos.x + player->dir.x * MOV)] != '1')
+	t_vect	new;
+
+	new.x = player->pos.x - player->dir.x * MOV;
+	new.y = player->pos.y - player->dir.y * MOV;
+	if (is_walkable(&map, new.x, new.y))
 	{
-		player->pos.x += -player->dir.x * MOV;
-		player->pos.y += -player->dir.y * MOV;
+		player->pos.x = new.x;
+		player->pos.y = new.y;
 	}
 }
 
 void	move_left(t_map map, t_player *player)
 {
-	if (map.skeleton[(int)(player->pos.y + player->dir.y * MOV)][(int)(player->pos.x + player->dir.x * MOV)] != '1')
+	t_vect	new;
+
+	new.x = player->pos.x - player->dir.y * MOV;
+	new.y = player->pos.y + player->dir.x * MOV;
+	if (is_walkable(&map, new.x, new.y))
 	{
-		player->pos.x += -player->dir.y * MOV;
-		player->pos.y += +player->dir.x * MOV;
+		player->pos.x = new.x;
+		player->pos.y = new.y;
 	}
 }
 
 void	move_right(t_map map, t_player *player)
 {
-	if (map.skeleton[(int)(player->pos.y + player->dir.y * MOV)][(int)(player->pos.x + player->dir.x * MOV)] != '1')
+	t_vect	new;
+
+	new.x = player->pos.x + player->dir.y * MOV;
+	new.y = player->pos.y - player->dir.x * MOV;
+	if (is_walkable(&map, new.x, new.y))
 	{
-		player->pos.x += player->dir.y * MOV;
-		player->pos.y += -player->dir.x * MOV;
+		player->pos.x = new.x;
+		player->pos.y = new.y;
 	}
 }
 

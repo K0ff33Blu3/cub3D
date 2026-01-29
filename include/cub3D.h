@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/27 14:27:47 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/28 15:28:54 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@
 # define ERR_FC_FORMAT "	color format invalid"
 # define ERR_FC_BOUNDS "	color value out of bounds"
 
-# define MOV	0.05
+# define MOV	0.01
 # define FOV	70.0
 # define ROT	0.05
 
