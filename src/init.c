@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:22:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/27 14:25:52 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/30 10:47:48 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_image	*init_tex(t_game *game, t_map *map)
 	load_tex_img(tex, game, map);
 	if (!tex[NO].img || !tex[EA].img || !tex[SO].img || !tex[WE].img)
 		return (destroy_tex(tex, game), NULL);
-	printf("NO width: %d\nNO height: %d\n", tex[NO].width, tex[NO].height);
 	get_tex_info(tex);
 	if (!tex[NO].addr || !tex[EA].addr || !tex[SO].addr || !tex[WE].addr)
 		return (destroy_tex(tex, game), NULL);
