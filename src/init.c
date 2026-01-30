@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:22:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/27 14:25:52 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/30 12:54:10 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_image	*init_tex(t_game *game, t_map *map)
 	load_tex_img(tex, game, map);
 	if (!tex[NO].img || !tex[EA].img || !tex[SO].img || !tex[WE].img)
 		return (destroy_tex(tex, game), NULL);
-	printf("NO width: %d\nNO height: %d\n", tex[NO].width, tex[NO].height);
 	get_tex_info(tex);
 	if (!tex[NO].addr || !tex[EA].addr || !tex[SO].addr || !tex[WE].addr)
 		return (destroy_tex(tex, game), NULL);
@@ -36,15 +35,22 @@ t_game	*init_game(t_map *map)
 	game = (t_game *)malloc(sizeof(t_game));
 	if (!game)
 		return (NULL);
+	game->map = map;
+	ft_memset(&game->k, 0, sizeof(t_keys));
+	game->last_frame = 0;
+	game->map->player = init_player(*game->map);
+	if (!game->map->player)
+		return (close_display(game), NULL);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WID, LEN, "cub3D");
 	game->img = (t_image *)malloc(sizeof(t_image));
 	if (!game->img)
-		return (NULL);
+		return (close_display(game), NULL);
 	game->img->img = mlx_new_image(game->mlx, WID, LEN);
 	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bpp, &game->img->line_len, &game->img->endian);
-	game->map = map;
-	ft_memset(&game->k, 0, sizeof(t_keys));
+	game->tex = init_tex(game, game->map);
+	if (!game->tex)
+		return (close_display(game), NULL);
 	return (game);
 }
 

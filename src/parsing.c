@@ -6,13 +6,13 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/27 13:23:21 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/30 13:09:31 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-int	parse_rgb(char *str, int *rgb, bool *is_set)
+int	parse_rgb(char *str, int *rgb, bool *is_set, int *hex)
 {
 	char	**values;
 	int		i;
@@ -35,6 +35,7 @@ int	parse_rgb(char *str, int *rgb, bool *is_set)
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255
 		|| rgb[2] < 0 || rgb[2] > 255)
 		return (error_msg(ERR_FC_BOUNDS), 1);
+	*hex = rgb_to_hex(rgb);
 	*is_set = true;
 	return (0);
 }
@@ -47,9 +48,9 @@ int	floor_ceiling(char *line, t_map *m_map)
 	while (line[i] == ' ')
 		i++;
 	if (ft_strncmp(line, "F ", 2) == 0)
-		return (parse_rgb(&line[i], m_map->floor_rgb, &m_map->floor_set));
+		return (parse_rgb(&line[i], m_map->floor_rgb, &m_map->floor_set, &m_map->floor_hex));
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		return (parse_rgb(&line[i], m_map->ceiling_rgb, &m_map->ceiling_set));
+		return (parse_rgb(&line[i], m_map->ceiling_rgb, &m_map->ceiling_set, &m_map->floor_hex));
 	return (0);
 }
 
