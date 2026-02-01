@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 13:00:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/28 16:03:20 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/30 11:29:18 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ bool	is_walkable(t_map *map, double x, double y)
 	return (map->skeleton[grid.y][grid.x] != '1');	
 }
 
-void	move_forward(t_map map, t_player *player)
+void	move_forward(t_map map, t_player *player, double dt)
 {
 	t_vect	new;
 
-	new.x = player->pos.x + player->dir.x * MOV;
-	new.y = player->pos.y + player->dir.y * MOV;
+	new.x = player->pos.x + player->dir.x * (MOV * dt);
+	new.y = player->pos.y + player->dir.y * (MOV * dt);
 	if (is_walkable(&map, new.x, new.y))
 	{
 		player->pos.x = new.x;
@@ -40,12 +40,12 @@ void	move_forward(t_map map, t_player *player)
 	}
 }
 
-void	move_backward(t_map map, t_player *player)
+void	move_backward(t_map map, t_player *player, double dt)
 {
 	t_vect	new;
 
-	new.x = player->pos.x - player->dir.x * MOV;
-	new.y = player->pos.y - player->dir.y * MOV;
+	new.x = player->pos.x - player->dir.x * (MOV * dt);
+	new.y = player->pos.y - player->dir.y * (MOV * dt);
 	if (is_walkable(&map, new.x, new.y))
 	{
 		player->pos.x = new.x;
@@ -53,12 +53,12 @@ void	move_backward(t_map map, t_player *player)
 	}
 }
 
-void	move_left(t_map map, t_player *player)
+void	move_left(t_map map, t_player *player, double dt)
 {
 	t_vect	new;
 
-	new.x = player->pos.x - player->dir.y * MOV;
-	new.y = player->pos.y + player->dir.x * MOV;
+	new.x = player->pos.x - player->dir.y * (MOV * dt);
+	new.y = player->pos.y + player->dir.x * (MOV * dt);
 	if (is_walkable(&map, new.x, new.y))
 	{
 		player->pos.x = new.x;
@@ -66,12 +66,12 @@ void	move_left(t_map map, t_player *player)
 	}
 }
 
-void	move_right(t_map map, t_player *player)
+void	move_right(t_map map, t_player *player, double dt)
 {
 	t_vect	new;
 
-	new.x = player->pos.x + player->dir.y * MOV;
-	new.y = player->pos.y - player->dir.x * MOV;
+	new.x = player->pos.x + player->dir.y * (MOV * dt);
+	new.y = player->pos.y - player->dir.x * (MOV * dt);
 	if (is_walkable(&map, new.x, new.y))
 	{
 		player->pos.x = new.x;

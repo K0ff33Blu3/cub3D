@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/29 16:15:51 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/30 12:27:17 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@
 # define ERR_FC_FORMAT "	color format invalid"
 # define ERR_FC_BOUNDS "	color value out of bounds"
 
-# define MOV	0.05
+# define MOV	1
 # define FOV	70.0
-# define ROT	0.05
+# define ROT	1
 # define FPS	60
 
 typedef	struct s_keys
@@ -191,6 +191,7 @@ typedef struct s_game
 	t_image	*tex;
 	int	*texture;
 	t_keys	k;
+	uint64_t	last_frame;
 
 }	t_game;
 
@@ -198,6 +199,7 @@ typedef struct s_game
 int		close_display(t_game *game);
 void	destroy_tex(t_image *tex, t_game *game);
 void	destroy_map(t_map *map);
+void	destroy_game(t_game *game);
 
 // init.c
 t_game		*init_game(t_map *map);
@@ -238,18 +240,11 @@ int		ft_mapchr(char *str, const char *map);
 int		check_s_wall(char *line, char **wall);
 
 // parsing.c
-int		parse_rgb(char *str, int *rgb, bool *is_set);
+int		parse_rgb(char *str, int *rgb, bool *is_set, int *rgb_to_hex);
 int		floor_ceiling(char *line, t_map *m_map);
 int		walls_ceiling_map(char *line, char *start, t_map *m_map);
 int		walls_ceiling(char *line, int fd, t_map *m_map);
 int		parsing(const char *path, t_map *m_map);
-
-//	movement.c
-void	move_forward(t_map map, t_player *player);
-void	move_backward(t_map map, t_player *player);
-void	move_left(t_map map, t_player *player);
-void	move_right(t_map map, t_player *player);
-void	rotate(t_player *player, double angle);
 
 
 void	render_frame(t_game *game);
@@ -279,10 +274,10 @@ unsigned int tex_get_pixel(t_image *tex, int x, int y);
 
 // movements.c
 
-void	move_forward(t_map map, t_player *player);
-void	move_backward(t_map map, t_player *player);
-void	move_left(t_map map, t_player *player);
-void	move_right(t_map map, t_player *player);
+void	move_forward(t_map map, t_player *player, double dt);
+void	move_backward(t_map map, t_player *player, double dt);
+void	move_left(t_map map, t_player *player, double dt);
+void	move_right(t_map map, t_player *player, double dt);
 void	rotate(t_player *player, double angle);
 
 #endif

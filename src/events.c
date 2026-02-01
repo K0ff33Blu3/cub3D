@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:27:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/29 17:09:34 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/30 12:54:44 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void	handle_events(t_game *game)
 	mlx_hook(game->win, DestroyNotify, NoEventMask, close_display, game);
 }
 
-// uint64_t	get_time(void)
-// {
-// 	struct timeval	tv;
-// 	uint64_t		now;
+uint64_t	get_time_usec(void)
+{
+	struct timeval	tv;
+	uint64_t		now;
 
-// 	if (gettimeofday(&tv, NULL))
-// 		return (printf("Error\n"), 0);		// FUNZIONE D'ERRORE
-// 	now = tv.tv_sec * 1000;
-// 	now += tv.tv_usec / 1000;
-// 	return (now);
-// }
+	if (gettimeofday(&tv, NULL))
+		return (printf("Error\n"), 0);		// FUNZIONE D'ERRORE
+	now = tv.tv_sec * 1000000LL;
+	now += tv.tv_usec;
+	return (now);
+}
 
 int	on_keypress(int keycode, t_keys *k)
 {
@@ -69,21 +69,34 @@ int	on_keyrelease(int keycode, t_keys *k)
 		k->right = false;
 	return (0);
 }
+
+
 int	loop_event(t_game *game)
 {
+	uint64_t	now;
+	double	dt;
 	
+	now = get_time_usec();
+	if (game->last_frame == 0)
+		game->last_frame = now;
+	dt = (now - game->last_frame) / 1000000.0;
+	game->last_frame = now;
+	if (dt > 0.05)
+        dt = 0.05;
+	if (game->k.esc == true)
+		close_display(game);
 	if (game->k.w == true)
-		move_forward(*game->map, game->map->player);
+		move_forward(*game->map, game->map->player, dt);
 	if (game->k.a == true)
-		move_left(*game->map, game->map->player);
+		move_left(*game->map, game->map->player, dt);
 	if (game->k.s == true)
-		move_backward(*game->map, game->map->player);
+		move_backward(*game->map, game->map->player, dt);
 	if (game->k.d == true)
-		move_right(*game->map, game->map->player);
+		move_right(*game->map, game->map->player, dt);
 	if (game->k.left == true)
-		rotate(game->map->player, -ROT);
+		rotate(game->map->player, -(ROT * dt));
 	if (game->k.right == true)
-		rotate(game->map->player, ROT);
+		rotate(game->map->player, ROT * dt);
 	render_frame(game);
 	return (0);
 }

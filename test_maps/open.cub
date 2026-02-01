@@ -3,18 +3,18 @@ NO    ./ciccio.xpm
 
 
 
-F       255,   0,  0,,,,
+F       255,   0,  0
 
 
-    C       0,   0,  255,,,,
+    C       0,   0,  255
 
 
 
 
-   EA ciao.xpm
+   EA ciao
 
 
-   WE     ./texture_occidentale
+   WE     ./texture_occidentale.xpm
 
 
 
