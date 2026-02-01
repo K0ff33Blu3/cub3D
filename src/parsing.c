@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/01 14:23:23 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/01 15:11:19 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	floor_ceiling(char *line, t_map *m_map)
 	if (ft_strncmp(line, "F ", 2) == 0)
 		return (parse_rgb(&line[i], m_map->floor_rgb, &m_map->floor_set, &m_map->floor_hex));
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		return (parse_rgb(&line[i], m_map->ceiling_rgb, &m_map->ceiling_set, &m_map->floor_hex));
+		return (parse_rgb(&line[i], m_map->ceiling_rgb, &m_map->ceiling_set, &m_map->ceiling_hex));
 	return (0);
 }
 
@@ -134,5 +134,6 @@ int	parsing(const char *path, t_map *m_map)
 	if (map == NULL)
 		return (1);
 	m_map->skeleton = map;
+	close(fd);
 	return (0);
 }
