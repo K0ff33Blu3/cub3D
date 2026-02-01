@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:31:17 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 16:06:52 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/01 16:06:40 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,18 @@ char **handle_map_error(char **map, int result)
 		error_msg(ERR_OPEN_MAP);
 	ft_free((void **)map, -1);
 	return (NULL);
+}
+
+void gnl_clear(int fd)
+{
+	char *line;
+
+	if (fd < 0 || fd >= 1024)
+		return;
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/01 14:23:05 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/01 16:10:09 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,8 +212,10 @@ t_vect	DDA_loop(t_map map, t_ray *ray);
 // error
 void	error_msg(char *msg);
 void	error_msg2(char *msg, char print_char);
+char	**handle_map_error(char **map, int result);
+void	gnl_clear(int fd);
 
-// events.c
+	// events.c
 void	handle_events(t_game *game);
 int		on_keypress(int keycode, t_keys *k);
 int		on_keyrelease(int keycode, t_keys *k);
@@ -222,7 +224,7 @@ int		loop_event(t_game *game);
 // utils.c
 char	*trim_back_nl(char *str);
 int		is_white(char *line);
-int	rgb_to_hex(int rgb[3]);
+int		rgb_to_hex(int rgb[3]);
 t_tile	vect_to_tile(t_vect vect);
 double	deg_to_rad(double deg);
 
@@ -239,13 +241,17 @@ int		is_file_type(const char *file, const char *type);
 int		ft_mapchr(char *str, const char *map);
 int		check_s_wall(char *line, char **wall);
 
-// parsing.c
+// parsing
 int		parse_rgb(char *str, int *rgb, bool *is_set, int *rgb_to_hex);
 int		floor_ceiling(char *line, t_map *m_map);
 int		walls_ceiling_map(char *line, char *start, t_map *m_map);
 int		walls_ceiling(char *line, int fd, t_map *m_map);
 int		parsing(const char *path, t_map *m_map);
 
+// one_player
+int		player_count(const char *str, const char *set);
+int		mapset_count(char **mtx, const char *set);
+int		just_one_player(char **map);
 
 void	render_frame(t_game *game);
 

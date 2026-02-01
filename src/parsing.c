@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/01 15:11:19 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/01 16:09:10 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	parse_rgb(char *str, int *rgb, bool *is_set, int *hex)
 {
 	char	**values;
 	int		i;
-	int		rgb[3];
 
 	if (*is_set == true)
 		return (error_msg(ERR_FC_REPEAT), 1);
@@ -100,9 +99,9 @@ int	walls_ceiling(char *line, int fd, t_map *m_map)
 			line++;
 		result = walls_ceiling_map(line, start, m_map);
 		if (result == 1)
-			return (free(start), 1);
+			return (gnl_clear(fd), free(start), 1);
 		if (result == 2)
-			return (0);
+			return (gnl_clear(fd), 0);
 		free(start);
 		line = get_next_line(fd);
 	}
