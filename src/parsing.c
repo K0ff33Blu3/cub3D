@@ -6,13 +6,13 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 15:53:16 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/01 14:23:23 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	parse_rgb(char *str, int *hex, bool *is_set)
+int	parse_rgb(char *str, int *rgb, bool *is_set, int *hex)
 {
 	char	**values;
 	int		i;
@@ -41,7 +41,7 @@ int	parse_rgb(char *str, int *hex, bool *is_set)
 	return (0);
 }
 
-int	floor_celling(char *line, t_map *m_map)
+int	floor_ceiling(char *line, t_map *m_map)
 {
 	int	i;
 
@@ -49,9 +49,9 @@ int	floor_celling(char *line, t_map *m_map)
 	while (line[i] == ' ')
 		i++;
 	if (ft_strncmp(line, "F ", 2) == 0)
-		return (parse_rgb(&line[i], &m_map->floor_hex, &m_map->floor_set));
+		return (parse_rgb(&line[i], m_map->floor_rgb, &m_map->floor_set, &m_map->floor_hex));
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		return (parse_rgb(&line[i], &m_map->ceiling_hex, &m_map->ceiling_set));
+		return (parse_rgb(&line[i], m_map->ceiling_rgb, &m_map->ceiling_set, &m_map->floor_hex));
 	return (0);
 }
 
@@ -67,7 +67,7 @@ int	walls_ceiling_map(char *line, char *start, t_map *m_map)
 	else if ((ft_strncmp(line, "F ", 2) == 0)
 		|| (ft_strncmp(line, "C ", 2) == 0))
 	{
-		if (floor_celling(line, m_map))
+		if (floor_ceiling(line, m_map))
 			return (1);
 	}
 	else if (*line == '1' || *line == '0' || *line == 'N' || *line == 'S'

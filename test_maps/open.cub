@@ -1,9 +1,20 @@
 SO ./qualcosa.xpm
 NO    ./ciccio.xpm
-   EA ciao.xpm
 
 
-   WE     ./texture_occidentale
+
+F       255,   0,  0
+
+
+    C       0,   0,  255
+
+
+
+
+   EA ciao
+
+
+   WE     ./texture_occidentale.xpm
 
 
 

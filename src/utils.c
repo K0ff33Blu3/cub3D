@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:06:21 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/23 13:31:12 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/27 13:29:28 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,91 +17,46 @@ int	rgb_to_hex(int rgb[3])
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
-void	putpixel(t_game game, int x, int y, int color)
+t_tile	vect_to_tile(t_vect vect)
 {
-	int	*offset;
-	int	index;
-	int	pixels_per_line;
+	t_tile	tile;
 
-	pixels_per_line = game.line_len / 4;
-	offset = (int *)game.mlx_img_addr;
-	index = y * pixels_per_line + x;
-	offset[index] = color;
+	tile.x = floor(vect.x);
+	tile.y = floor(vect.y);
+	return (tile);
 }
 
-/*
-** Stampa la struttura t_tile
-*/
-void	print_tile(t_tile tile)
+double	deg_to_rad(double deg)
 {
-	printf("{\n\tx = %d\n\ty = %d\n}\n", tile.x, tile.y);
+	return ((deg / 180.0) * M_PI);
 }
 
-/*
-** Stampa la struttura t_ray
-*/
-void	print_ray(t_ray ray)
+char	*trim_back_nl(char *str)
 {
-	printf("Ray direction:\n");
-	print_vect(ray.dir);
-	printf("Ray tile position:\n");
-	print_tile(ray.tile_pos);
-	printf("Ray tile movement:\n");
-	print_tile(ray.tile_mov);
-	printf("Ray side distance:\n");
-	print_vect(ray.side_dist);
-	printf("Ray delta distance:\n");
-	print_vect(ray.delta_dist);
-	printf("camera_x: %f\n", ray.camera_x);
+	size_t	i;
+
+	if (str[0] == '\n')
+		str[0] = '\0';
+	if (str[0] == '\0')
+		return (str);
+	i = ft_strlen(str) - 1;
+	while (str[i] == '\n')
+		i--;
+	if (str[i + 1] == '\n')
+		str[++i] = '\0';
+	return (str);
 }
 
-/*
-** Stampa la struttura t_vect
-*/
-void	print_vect(t_vect vect)
+int	is_white(char *line)
 {
-	printf("{\n\tx = %f\n\ty = %f\n}\n", vect.x, vect.y);
-}
-/*
-** Stampa la struttura t_player
-*/
-void	print_player(t_player player)
-{
-	printf("Player position:\n");
-	print_vect(player.pos);
-	printf("Player direction:\n");
-	print_vect(player.dir);
-	printf("Player camera plane:\n");
-	print_vect(player.camera);
-}
-/*
-** Stampa la struttura t_map
-*/
-void	print_map(t_map map)
-{
-	int	i;
+	int	count;
 
-	i = 0;
-	while (i < map.height)
+	count = 0;
+	while (line[count])
 	{
-		printf("%s\n", map.skeleton[i]);
-		i++;
+		if (!ft_isspace(line[count]))
+			return (0);
+		count++;
 	}
-	printf("NO_text_path: %s\n", map.no_text_path);
-	printf("SO_text_path: %s\n", map.so_text_path);
-	printf("EA_text_path: %s\n", map.ea_text_path);
-	printf("WE_text_path: %s\n", map.we_text_path);
-	printf("floor RGB: [ %d, %d, %d ]\n", map.floor_rgb[0], map.floor_rgb[1], map.floor_rgb[2]);
-	printf("ceiling RGB: [ %d, %d, %d ]\n", map.ceiling_rgb[0], map.ceiling_rgb[1], map.ceiling_rgb[2]);
-	printf("map_width: %d\n", map.width);
-	printf("map_height: %d\n", map.height);
-	print_player(*map.player);
-}
-/*
-** Stampa la struttura t_game
-*/
-void	print_game(t_game game)
-{
-	printf("mlx: %p\nmlx_win: %p\n", game.mlx, game.mlx_win);
-	print_map(*game.map);
+	return (1);
 }

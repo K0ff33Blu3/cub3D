@@ -1,14 +1,15 @@
-NO ./textures/colorstone.xpm
-SO ./textures/greystone.xpm
-WE ./textures/wood.xpm
-EA ./textures/redbrick.xpm
+NO ./textures/35.xpm
+SO ./textures/39.xpm
+WE ./textures/44.xpm
+EA ./textures/45.xpm
 
-F 220,100,0
+F 0,0,0
 
-C 225,30,0
+C 255,255,255
 
 11111111111
-100E0000001
+10000000001
+100N0000001
 10000000001
 1000000W001
 10000000001

@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/23 16:14:35 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/01 14:23:05 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define LSHIFT 65505
 # define LALT 65513
 
+
 // INCLUDE
 
 # include <stdlib.h>
@@ -41,19 +42,22 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
-# include <math.h>
 # include <sys/time.h>
 # include <X11/X.h>
 # include <stdbool.h>
 # include <limits.h>
 # include <float.h>
 # include <stdbool.h>
+# include <math.h>
+
 
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 
-
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 // ERROR
 
@@ -77,9 +81,21 @@
 # define ERR_FC_FORMAT "	color format invalid"
 # define ERR_FC_BOUNDS "	color value out of bounds"
 
-# define MOV	1.31
+# define MOV	1
 # define FOV	70.0
+# define ROT	1
+# define FPS	60
 
+typedef	struct s_keys
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+	bool	esc;
+}	t_keys;
 
 typedef	enum e_side
 {
@@ -88,6 +104,17 @@ typedef	enum e_side
 	SO = 2,
 	WE = 3,
 } t_side;
+
+typedef struct s_image
+{
+    void    *img;
+    char    *addr;
+    int     width;
+    int     height;
+    int     bpp;
+    int     line_len;
+    int     endian;
+}	t_image;
 
 
 typedef struct s_vect
@@ -107,6 +134,11 @@ typedef	struct s_column
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	t_vect	tex_pos;
+	double	wall_x;
+	double	delta_tex;
+	int		wall_side;
+	t_image *tex;
 }	t_column;
 
 
@@ -130,7 +162,7 @@ typedef struct s_player
 	t_vect	pos;
 	t_vect	dir;
 	t_vect	camera;
-
+	
 }	t_player;
 
 typedef struct s_map
@@ -146,8 +178,6 @@ typedef struct s_map
 	bool		floor_set;
 	bool		ceiling_set;
 	int			ceiling_hex;
-	int		width;
-	int			height;
 	t_player	*player;
 	char		*tmp_line;
 }	t_map;
@@ -155,43 +185,48 @@ typedef struct s_map
 typedef struct s_game
 {
 	void	*mlx;
-	void	*mlx_win;
-	void	*mlx_img;
-	char	*mlx_img_addr;
-	int		bits_per_pixel;
-	int		line_len;
-	int		endian;
+	t_image	*img;
+	void	*win;
 	t_map	*map;
+	t_image	*tex;
+	int	*texture;
+	t_keys	k;
+	uint64_t	last_frame;
 
 }	t_game;
 
+//	cleaning.c
 int		close_display(t_game *game);
+void	destroy_tex(t_image *tex, t_game *game);
+void	destroy_map(t_map *map);
+void	destroy_game(t_game *game);
 
 // init.c
-
-t_game	*init_game(void);
+t_game		*init_game(t_map *map);
 t_player	*init_player(t_map map);
+t_image		*init_tex(t_game *game, t_map *map);
 
-// events.c
-
-void	handle_events(t_game *game);
-int		on_keypress(int keycode, t_game *game);
-
-// utils_mine.c
-
-char	*trim_back_nl(char *str);
-int		skip_spaces(char *line, int count);
-int		is_white(char *line);
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+//	DDA_loop.c
+t_vect	DDA_loop(t_map map, t_ray *ray);
 
 // error
-
 void	error_msg(char *msg);
 void	error_msg2(char *msg, char print_char);
-char	**handle_map_error(char **map, int result);
+
+// events.c
+void	handle_events(t_game *game);
+int		on_keypress(int keycode, t_keys *k);
+int		on_keyrelease(int keycode, t_keys *k);
+int		loop_event(t_game *game);
+
+// utils.c
+char	*trim_back_nl(char *str);
+int		is_white(char *line);
+int	rgb_to_hex(int rgb[3]);
+t_tile	vect_to_tile(t_vect vect);
+double	deg_to_rad(double deg);
 
 // parsing map
-
 int		parsing_map(char **map, int line, int c);
 int		check_help(int *i, char *allowed);
 int		check_map(char **map, int line, int count, char *allowed);
@@ -199,30 +234,22 @@ int		walls_checker(char *line, t_map *m_map);
 char	**get_map(char *line, int fd, int i);
 
 // parsing_utils
-
 int		check_rgb_format(char *str);
 int		is_file_type(const char *file, const char *type);
 int		ft_mapchr(char *str, const char *map);
 int		check_s_wall(char *line, char **wall);
 
-// parsing
-
-int		parse_rgb(char *str, int *hex, bool *is_set);
-int		floor_celling(char *line, t_map *m_map);
+// parsing.c
+int		parse_rgb(char *str, int *rgb, bool *is_set, int *rgb_to_hex);
+int		floor_ceiling(char *line, t_map *m_map);
 int		walls_ceiling_map(char *line, char *start, t_map *m_map);
 int		walls_ceiling(char *line, int fd, t_map *m_map);
 int		parsing(const char *path, t_map *m_map);
 
-// one_player
-
-int player_count(const char *str, const char *set);
-int mapset_count(char **mtx, const char *set);
-int just_one_player(char **map);
-
-void print_map(t_map map);
 
 void	render_frame(t_game *game);
 
+void	print_map(t_map map);
 void	print_vect(t_vect vect);
 void	print_player(t_player player);
 void	print_map(t_map map);
@@ -231,21 +258,26 @@ void	print_tile(t_tile tile);
 void	print_ray(t_ray ray);
 int		rgb_to_hex(int rgb[3]);
 
-
-t_vect	get_delta_distance(t_vect dir);
-t_vect	get_ray_direction(t_player player, double camera_x);
-t_tile	cast_vect2tile(t_vect vect);
-t_vect	get_side_distance(t_vect pos, t_ray *ray);
 t_ray	*init_raycasting(t_player *player, double x);
 t_vect	DDA_loop(t_map map, t_ray *ray);
 void	render_frame(t_game *game);
-void	putpixel(t_game game, int x, int y, int color);
+void	putpixel(t_image *img, int x, int y, int color);
 
-t_vect get_player_camera(t_vect dir);
-t_vect	get_player_dir(char **map, t_vect pos);
-t_vect get_player_pos(char **map);
+t_vect set_player_pos(char **map);
+t_vect	set_player_dir(char **map, t_vect pos);
+t_vect set_player_camera(t_vect dir);
 
-#include "hardcoded.h"
+void	load_tex_img(t_image *tex, t_game *game, t_map *map);
+void	get_tex_info(t_image *tex);
+void	set_tex_to_col(t_game *game, t_column *col);
+unsigned int tex_get_pixel(t_image *tex, int x, int y);
 
+// movements.c
+
+void	move_forward(t_map map, t_player *player, double dt);
+void	move_backward(t_map map, t_player *player, double dt);
+void	move_left(t_map map, t_player *player, double dt);
+void	move_right(t_map map, t_player *player, double dt);
+void	rotate(t_player *player, double angle);
 
 #endif

@@ -16,7 +16,7 @@ LIBFT_LIB	:= $(LIBFT_DIR)/libft.a
 LDFLAGS  	+= -L$(LIBFT_DIR) -lft
 
 # Compilatore e flags
-CC		:= cc
+CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror -g  -I$(INC_DIR) -I$(LIBFT_DIR)
 
 # Sorgenti
