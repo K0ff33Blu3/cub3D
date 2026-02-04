@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:12:00 by elmondo           #+#    #+#             */
-/*   Updated: 2026/01/18 17:43:57 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/04 18:12:56 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	is_file_type(const char *file, const char *type)
 int	check_s_wall(char *line, char **wall)
 {
 	int	count;
+	int fd;
 
 	count = skip_spaces(line, 2);
 	if (*wall)
@@ -57,10 +58,16 @@ int	check_s_wall(char *line, char **wall)
 	if (!*wall)
 		return (error_msg(MALLOC), 1);
 	*wall = trim_back_nl(*wall);
+	fd = open(*wall, O_RDONLY);
 	if (is_file_type(*wall, ".xpm"))
 	{
 		free(*wall);
 		*wall = NULL;
+		return (1);
+	}
+	if (fd < 0)
+	{
+		error_msg("No texture");
 		return (1);
 	}
 	return (0);

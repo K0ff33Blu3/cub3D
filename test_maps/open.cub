@@ -1,5 +1,5 @@
-SO ./qualcosa.xpm
-NO    ./ciccio.xpm
+  SO ./textures/bricks_multicolor.xpm
+  NO ./textures/bricks_multicolor.xpm
 
 
 
@@ -11,24 +11,20 @@ F       255,   0,  0
 
 
 
-   EA ciao
+   EA ./textures/bricks_multicolor.xpm
 
 
-   WE     ./texture_occidentale.xpm
+   WE     ./textures/bricks_multicolor.xpm
 
 
 
-F       255,   0,  0
 
 
-    C       0,   0,  255
-
-
-11111
-100E1
-10000
-11111
-
+1111111
+1000001
+100W001
+1000001
+1111111
 
 
 
