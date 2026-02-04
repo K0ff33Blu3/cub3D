@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/04 17:32:41 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/04 17:38:07 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int parsing(const char *path, t_map *m_map)
 	if (!m_map->tmp_line)
 		return (error_msg(ERR_NO_MAP), gnl_clear(fd), close(fd), 1);
 	map = get_map(m_map->tmp_line, fd, 0);
+	m_map->tmp_line = NULL;
 	if (map == NULL)
 		return (1);
 	m_map->skeleton = map;
