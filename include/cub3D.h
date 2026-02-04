@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/01 16:10:09 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/04 15:14:53 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,24 @@
 
 // ERROR
 
-# define ERR_ARGS "	incorrect arguments number"
-# define ERR_FORMAT "	incorrect file format"
-# define ERR_OPEN "	failed to open path"
-# define ERR_EMPTY_OR_FOLDER "	path points to empty file or folder"
-# define ERR_NEWLINE_MAP "	empty line in map"
-# define ERR_OPEN_MAP "	open map"
-# define ERR_NO_MAP "	missing map"
-# define ERR_SPAWN "	map needs exactly ONE of the following chars: N S W E"
-# define BAD_CHAR "	invalid character"
-# define ERR_CHAR_FILE "	invalid character in scene description file"
-# define MALLOC "	malloc failure"
-# define ERR_MALLOC "	malloc failure"
-# define ERR_SPACE_END_PATH "	trim chars at end of wall path"
-# define ERR_WALL_REPEAT "	wall is repeated in scene description file"
-# define ERR_FC_MISS "	floor or ceiling is missing in scene description file"
-# define ERR_WALL_MISS "	wall is missing in scene description file"
-# define ERR_FC_REPEAT "	floor or ceiling is repeated in scene description file"
-# define ERR_FC_FORMAT "	color format invalid"
-# define ERR_FC_BOUNDS "	color value out of bounds"
+# define ERR_ARGS "incorrect arguments number"
+# define ERR_FORMAT "incorrect file format"
+# define ERR_OPEN "failed to open path"
+# define ERR_EMPTY_OR_FOLDER "path points to empty file or folder"	// INUTILIZZATO
+# define ERR_NEWLINE_MAP "empty line in map"
+# define ERR_OPEN_MAP "open map"
+# define ERR_NO_MAP "missing map"
+# define ERR_SPAWN "map needs exactly ONE of the following chars: N S W E"
+# define BAD_CHAR "invalid character"
+# define ERR_CHAR_FILE "invalid character in scene description file"
+# define MALLOC "malloc failure"
+# define ERR_SPACE_END_PATH "trim chars at end of wall path"
+# define ERR_WALL_REPEAT "wall is repeated in scene description file"
+# define ERR_FC_MISS "floor or ceiling is missing in scene description file"
+# define ERR_WALL_MISS "wall is missing in scene description file"
+# define ERR_FC_REPEAT "floor or ceiling is repeated in scene description file"
+# define ERR_FC_FORMAT "color format invalid"
+# define ERR_FC_BOUNDS "color value out of bounds"
 
 # define MOV	1
 # define FOV	70.0

@@ -6,20 +6,11 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/29 12:39:17 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/04 14:42:24 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-/** 
- * @brief Ottieni i delta_dist
- * 
- * @param delta_dist Distanza da percorrere per raggiungere rispettivamente il lato x o y del prossimo tile
- * 
- * Il calcolo è semplificato dall'uso del valore assoluto piuttosto che una radice quadrata
- * @return t_vect Vettore delta_dist
- */
 
 void	putpixel(t_image *img, int x, int y, int color)
 {

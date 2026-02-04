@@ -1,6 +1,6 @@
  
 
-SO ./textures/greystone.xpm
+SO ./textures/35.xpm
     C       0,   0,  255
 	    F       0,   0,  255
    EA ./textures/redbrick.xpm

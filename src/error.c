@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:31:17 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/01 16:06:40 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/04 15:14:08 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	error_msg(char *msg)
 {
-	printf("Error\n%s\n", msg);
+	printf("Error: %s\n", msg);
 }
 
 void	error_msg2(char *msg, char print_char)
 {
-	printf("Error\n%s %c in map\n", msg, print_char);
+	printf("Error: %s %c in map\n", msg, print_char);
 }
 
 char **handle_map_error(char **map, int result)
