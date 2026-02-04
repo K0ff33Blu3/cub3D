@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:12:00 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/04 18:12:56 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/04 18:28:33 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,17 @@ int	check_s_wall(char *line, char **wall)
 	if (!*wall)
 		return (error_msg(MALLOC), 1);
 	*wall = trim_back_nl(*wall);
-	fd = open(*wall, O_RDONLY);
 	if (is_file_type(*wall, ".xpm"))
 	{
 		free(*wall);
 		*wall = NULL;
 		return (1);
 	}
+	fd = open(*wall, O_RDONLY);
 	if (fd < 0)
-	{
-		error_msg("No texture");
-		return (1);
-	}
+		return (error_msg("No texture"), 1);
+	else
+		close(fd);
 	return (0);
 }
 
