@@ -6,16 +6,16 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:03:20 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/01 16:20:32 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/04 17:32:41 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	parse_rgb(char *str, int *rgb, bool *is_set, int *hex)
+int parse_rgb(char *str, int *rgb, bool *is_set, int *hex)
 {
-	char	**values;
-	int		i;
+	char **values;
+	int i;
 
 	if (*is_set == true)
 		return (error_msg(ERR_FC_REPEAT), 1);
@@ -25,24 +25,22 @@ int	parse_rgb(char *str, int *rgb, bool *is_set, int *hex)
 	i = 0;
 	while (values[i])
 		i++;
-	if (i != 3 || !check_rgb_format(values[0]) || !check_rgb_format(values[1])
-		|| !check_rgb_format(values[2]))
+	if (i != 3 || !check_rgb_format(values[0]) || !check_rgb_format(values[1]) || !check_rgb_format(values[2]))
 		return (ft_free((void **)values, -1), error_msg(ERR_FC_FORMAT), 1);
 	rgb[0] = ft_atoi(values[0]);
 	rgb[1] = ft_atoi(values[1]);
 	rgb[2] = ft_atoi(values[2]);
 	ft_free((void **)values, -1);
-	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255
-		|| rgb[2] < 0 || rgb[2] > 255)
+	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0 || rgb[2] > 255)
 		return (error_msg(ERR_FC_BOUNDS), 1);
 	*hex = rgb_to_hex(rgb);
 	*is_set = true;
 	return (0);
 }
 
-int	floor_ceiling(char *line, t_map *m_map)
+int floor_ceiling(char *line, t_map *m_map)
 {
-	int	i;
+	int i;
 
 	i = 1;
 	while (line[i] == ' ')
@@ -54,23 +52,19 @@ int	floor_ceiling(char *line, t_map *m_map)
 	return (0);
 }
 
-int	walls_ceiling_map(char *line, char *start, t_map *m_map)
+int walls_ceiling_map(char *line, char *start, t_map *m_map)
 {
-	if ((ft_strncmp(line, "NO ", 3) == 0) || (ft_strncmp(line, "SO ", 3) == 0)
-		|| (ft_strncmp(line, "WE ", 3) == 0)
-		|| (ft_strncmp(line, "EA ", 3) == 0))
+	if ((ft_strncmp(line, "NO ", 3) == 0) || (ft_strncmp(line, "SO ", 3) == 0) || (ft_strncmp(line, "WE ", 3) == 0) || (ft_strncmp(line, "EA ", 3) == 0))
 	{
 		if (walls_checker(line, m_map))
 			return (1);
 	}
-	else if ((ft_strncmp(line, "F ", 2) == 0)
-		|| (ft_strncmp(line, "C ", 2) == 0))
+	else if ((ft_strncmp(line, "F ", 2) == 0) || (ft_strncmp(line, "C ", 2) == 0))
 	{
 		if (floor_ceiling(line, m_map))
 			return (1);
 	}
-	else if (*line == '1' || *line == '0' || *line == 'N' || *line == 'S'
-		|| *line == 'E' || *line == 'W')
+	else if (*line == '1' || *line == '0' || *line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
 	{
 		m_map->tmp_line = start;
 		return (2);
@@ -80,10 +74,10 @@ int	walls_ceiling_map(char *line, char *start, t_map *m_map)
 	return (0);
 }
 
-int	walls_ceiling(char *line, int fd, t_map *m_map)
+int walls_ceiling(char *line, int fd, t_map *m_map)
 {
-	char	*start;
-	int		result;
+	char *start;
+	int result;
 
 	while (line)
 	{
@@ -91,10 +85,9 @@ int	walls_ceiling(char *line, int fd, t_map *m_map)
 		{
 			free(line);
 			line = get_next_line(fd);
-			gnl_clear(fd);
 		}
 		if (!line)
-			break ;
+			break;
 		start = line;
 		while (*line == ' ' || *line == '\t')
 			line++;
@@ -109,11 +102,11 @@ int	walls_ceiling(char *line, int fd, t_map *m_map)
 	return (0);
 }
 
-int	parsing(const char *path, t_map *m_map)
+int parsing(const char *path, t_map *m_map)
 {
-	int		fd;
-	char	**map;
-	char	*line;
+	int fd;
+	char **map;
+	char *line;
 
 	if (is_file_type(path, ".cub"))
 		return (1);
@@ -122,14 +115,13 @@ int	parsing(const char *path, t_map *m_map)
 		return (error_msg(ERR_OPEN), 1);
 	line = get_next_line(fd);
 	if (walls_ceiling(line, fd, m_map) != 0)
-		return (close(fd), 1);
+		return (gnl_clear(fd), close(fd), 1);
 	if (!m_map->floor_set || !m_map->ceiling_set)
-		return (error_msg(ERR_FC_MISS), close(fd), 1);
-	if (m_map->no_text_path == NULL || m_map->so_text_path == NULL
-		|| m_map->ea_text_path == NULL || m_map->we_text_path == NULL)
-		return (error_msg(ERR_WALL_MISS), close(fd), 1);
+		return (error_msg(ERR_FC_MISS), gnl_clear(fd), close(fd), 1);
+	if (m_map->no_text_path == NULL || m_map->so_text_path == NULL || m_map->ea_text_path == NULL || m_map->we_text_path == NULL)
+		return (error_msg(ERR_WALL_MISS), gnl_clear(fd), close(fd), 1);
 	if (!m_map->tmp_line)
-		return (error_msg(ERR_NO_MAP), close(fd), 1);
+		return (error_msg(ERR_NO_MAP), gnl_clear(fd), close(fd), 1);
 	map = get_map(m_map->tmp_line, fd, 0);
 	if (map == NULL)
 		return (1);
