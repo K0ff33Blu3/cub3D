@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 13:04:24 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/04 17:33:40 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/05 12:40:34 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void destroy_tex(t_image *tex, t_game *game)
+void	destroy_tex(t_image *tex, t_game *game)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 4)
@@ -23,7 +23,7 @@ void destroy_tex(t_image *tex, t_game *game)
 	free(tex);
 }
 
-void destroy_map(t_map *map)
+void	destroy_map(t_map *map)
 {
 	if (map->skeleton)
 		ft_free((void **)map->skeleton, -1);
@@ -35,7 +35,7 @@ void destroy_map(t_map *map)
 	free(map->we_text_path);
 }
 
-int close_display(t_game *game)
+int	close_display(t_game *game)
 {
 	if (game->map)
 		destroy_map(game->map);

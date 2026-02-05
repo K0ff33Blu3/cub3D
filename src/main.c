@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:59:27 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/01 14:22:45 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/05 12:48:05 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 		return (destroy_map(&m_map), exit(EXIT_FAILURE), 1);
 	game = init_game(&m_map);
 	if (!game)
-		return (exit(EXIT_FAILURE), 1); 
+		return (exit(EXIT_FAILURE), 1);
 	handle_events(game);
 	render_frame(game);
 	mlx_loop(game->mlx);

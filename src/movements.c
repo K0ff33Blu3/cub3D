@@ -6,26 +6,11 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 13:00:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/30 11:29:18 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/05 13:13:29 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-bool	is_walkable(t_map *map, double x, double y)
-{
-	t_tile grid;
-	int	map_width;
-	int	map_height;
-
-	grid.x = (int)x;
-	grid.y = (int)y;
-	map_width = ft_strlen(map->skeleton[grid.y]);
-	map_height = array_size((void **)map->skeleton);
-	if (grid.x < 0 || grid.y < 0 || grid.x >= map_width || grid.y >= map_height)
-		return (false);
-	return (map->skeleton[grid.y][grid.x] != '1');	
-}
 
 void	move_forward(t_map map, t_player *player, double dt)
 {
@@ -85,6 +70,6 @@ void	rotate(t_player *player, double angle)
 
 	tmp = player->dir.x;
 	player->dir.x = tmp * cos(angle) + player->dir.y * sin(angle);
-	player->dir.y = - tmp * sin(angle) + player->dir.y * cos(angle);
+	player->dir.y = -tmp * sin(angle) + player->dir.y * cos(angle);
 	player->camera = set_player_camera(player->dir);
 }

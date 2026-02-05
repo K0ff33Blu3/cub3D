@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:22:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/01 14:18:17 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/05 12:46:55 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ t_game	*init_game(t_map *map)
 	if (!game->img)
 		return (close_display(game), NULL);
 	game->img->img = mlx_new_image(game->mlx, WID, LEN);
-	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bpp, &game->img->line_len, &game->img->endian);
+	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bpp,
+			&game->img->line_len, &game->img->endian);
 	game->tex = init_tex(game, game->map);
 	if (!game->tex)
 		return (close_display(game), NULL);
@@ -56,7 +57,7 @@ t_game	*init_game(t_map *map)
 
 t_player	*init_player(t_map map)
 {
-	t_player *player;
+	t_player	*player;
 
 	player = (t_player *)malloc(sizeof(t_player));
 	if (!player)

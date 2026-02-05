@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/04 15:14:53 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/05 15:12:42 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,9 @@
 # include <X11/X.h>
 # include <stdbool.h>
 # include <limits.h>
-# include <float.h>
+// # include <float.h>
 # include <stdbool.h>
 # include <math.h>
-
 
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
@@ -198,7 +197,6 @@ typedef struct s_game
 int		close_display(t_game *game);
 void	destroy_tex(t_image *tex, t_game *game);
 void	destroy_map(t_map *map);
-void	destroy_game(t_game *game);
 
 // init.c
 t_game		*init_game(t_map *map);
@@ -206,7 +204,7 @@ t_player	*init_player(t_map map);
 t_image		*init_tex(t_game *game, t_map *map);
 
 //	DDA_loop.c
-t_vect	DDA_loop(t_map map, t_ray *ray);
+t_vect	dda_loop(t_map map, t_ray *ray);
 
 // error
 void	error_msg(char *msg);
@@ -264,7 +262,7 @@ void	print_ray(t_ray ray);
 int		rgb_to_hex(int rgb[3]);
 
 t_ray	*init_raycasting(t_player *player, double x);
-t_vect	DDA_loop(t_map map, t_ray *ray);
+t_vect	dda_loop(t_map map, t_ray *ray);
 void	render_frame(t_game *game);
 void	putpixel(t_image *img, int x, int y, int color);
 

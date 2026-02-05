@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:12:00 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/04 18:28:33 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/05 12:53:40 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_file_type(const char *file, const char *type)
 int	check_s_wall(char *line, char **wall)
 {
 	int	count;
-	int fd;
+	int	fd;
 
 	count = skip_spaces(line, 2);
 	if (*wall)

@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:27:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/30 12:54:44 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/05 12:45:49 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ uint64_t	get_time_usec(void)
 	uint64_t		now;
 
 	if (gettimeofday(&tv, NULL))
-		return (printf("Error\n"), 0);		// FUNZIONE D'ERRORE
+		return (printf("Error\n"), 0);
 	now = tv.tv_sec * 1000000LL;
 	now += tv.tv_usec;
 	return (now);
@@ -70,19 +70,18 @@ int	on_keyrelease(int keycode, t_keys *k)
 	return (0);
 }
 
-
 int	loop_event(t_game *game)
 {
 	uint64_t	now;
-	double	dt;
-	
+	double		dt;
+
 	now = get_time_usec();
 	if (game->last_frame == 0)
 		game->last_frame = now;
 	dt = (now - game->last_frame) / 1000000.0;
 	game->last_frame = now;
 	if (dt > 0.05)
-        dt = 0.05;
+		dt = 0.05;
 	if (game->k.esc == true)
 		close_display(game);
 	if (game->k.w == true)
@@ -97,6 +96,5 @@ int	loop_event(t_game *game)
 		rotate(game->map->player, -(ROT * dt));
 	if (game->k.right == true)
 		rotate(game->map->player, ROT * dt);
-	render_frame(game);
-	return (0);
+	return (render_frame(game), 0);
 }

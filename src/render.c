@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/04 14:42:24 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/05 13:11:09 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	putpixel(t_image *img, int x, int y, int color)
 	int	*offset;
 	int	index;
 	int	pixels_per_line;
-	
+
 	if (x < 0 || x >= WID || y < 0 || y >= LEN)
-        return ;	
+		return ;
 	pixels_per_line = img->line_len / 4;
 	offset = (int *)img->addr;
 	index = y * pixels_per_line + x;
@@ -35,13 +35,13 @@ static double	set_wall_x(int side, t_vect hitpoint)
 	else
 		wall_x = hitpoint.x;
 	wall_x -= floor(wall_x);
-	return(wall_x);
+	return (wall_x);
 }
 
 t_column	get_column(t_ray *ray)
 {
 	t_column	col;
-	
+
 	col.line_height = LEN / ray->wall_dist;
 	col.draw_start = LEN / 2 - col.line_height / 2;
 	if (col.draw_start < 0)
@@ -63,8 +63,9 @@ void	put_column(t_game *game, t_column *col, int x)
 		putpixel(game->img, x, i, game->map->ceiling_hex);
 	while (++i < col->draw_end)
 	{
-		putpixel(game->img, x, i, tex_get_pixel(col->tex, col->tex_pos.x, col->tex_pos.y));
-		col->tex_pos.y +=  1.0 * col->delta_tex;
+		putpixel(game->img, x, i,
+			tex_get_pixel(col->tex, col->tex_pos.x, col->tex_pos.y));
+		col->tex_pos.y += 1.0 * col->delta_tex;
 	}
 	while (++i < LEN)
 		putpixel(game->img, x, i, game->map->floor_hex);
@@ -72,9 +73,9 @@ void	put_column(t_game *game, t_column *col, int x)
 
 void	render_frame(t_game *game)
 {
-	int	x;
+	int		x;
 	t_ray	*ray;
-	
+
 	x = 0;
 	while (x < WID)
 	{
