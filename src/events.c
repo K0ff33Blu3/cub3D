@@ -6,21 +6,13 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:27:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/05 12:45:49 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:40:57 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	handle_events(t_game *game)
-{
-	mlx_hook(game->win, KeyPress, KeyPressMask, on_keypress, &game->k);
-	mlx_hook(game->win, KeyRelease, KeyReleaseMask, on_keyrelease, &game->k);
-	mlx_loop_hook(game->mlx, loop_event, game);
-	mlx_hook(game->win, DestroyNotify, NoEventMask, close_display, game);
-}
-
-uint64_t	get_time_usec(void)
+static uint64_t	get_time_usec(void)
 {
 	struct timeval	tv;
 	uint64_t		now;
@@ -30,6 +22,14 @@ uint64_t	get_time_usec(void)
 	now = tv.tv_sec * 1000000LL;
 	now += tv.tv_usec;
 	return (now);
+}
+
+void	handle_events(t_game *game)
+{
+	mlx_hook(game->win, KeyPress, KeyPressMask, on_keypress, &game->k);
+	mlx_hook(game->win, KeyRelease, KeyReleaseMask, on_keyrelease, &game->k);
+	mlx_loop_hook(game->mlx, loop_event, game);
+	mlx_hook(game->win, DestroyNotify, NoEventMask, close_display, game);
 }
 
 int	on_keypress(int keycode, t_keys *k)

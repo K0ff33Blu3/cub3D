@@ -6,13 +6,13 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/06 11:19:16 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:35:20 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	putpixel(t_image *img, int x, int y, int color)
+static void	putpixel(t_image *img, int x, int y, int color)
 {
 	int	*offset;
 	int	index;
@@ -38,7 +38,7 @@ static double	set_wall_x(int side, t_vect hitpoint)
 	return (wall_x);
 }
 
-t_column	get_column(t_ray *ray)
+static t_column	get_column(t_ray *ray)
 {
 	t_column	col;
 
@@ -54,7 +54,7 @@ t_column	get_column(t_ray *ray)
 	return (col);
 }
 
-void	put_column(t_game *game, t_column *col, int x)
+static void	put_column(t_game *game, t_column *col, int x)
 {
 	int	i;
 

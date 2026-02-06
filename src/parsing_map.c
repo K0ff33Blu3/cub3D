@@ -6,11 +6,19 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:05:02 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/05 12:53:17 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:27:33 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+static int	check_help(int *i, char *allowed)
+{
+	if (allowed[*i] == '\0')
+		return (1);
+	*i = 0;
+	return (0);
+}
 
 int	walls_checker(char *line, t_map *mlx)
 {
@@ -60,14 +68,6 @@ int	parsing_map(char **map, int line, int c)
 	}
 	if (just_one_player(map) != 0)
 		return (error_msg(ERR_SPAWN), 2);
-	return (0);
-}
-
-int	check_help(int *i, char *allowed)
-{
-	if (allowed[*i] == '\0')
-		return (1);
-	*i = 0;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 13:36:35 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/05 13:13:36 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:42:49 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_vect	set_player_pos(char **map)
 		}
 		i++;
 	}
-	return (pos); // AGGIUNGERE CONTROLLO SU PLAYER
+	return (pos);
 }
 
 t_vect	set_player_dir(char **map, t_vect pos)
