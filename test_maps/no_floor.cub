@@ -2,7 +2,7 @@
 NO    ./textures/colorstone.xpm
 SO ./textures/greystone.xpm
     C       0,   0,  255
-	F 220,100,0
+	
    EA ./textures/redbrick.xpm
    WE     ./textures/wood.xpm
  

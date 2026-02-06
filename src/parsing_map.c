@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:05:02 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/06 11:27:33 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:46:17 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,10 @@ char	**get_map(char *line, int fd, int i)
 				(i + 2) * sizeof(char *));
 		if (!map)
 			return (error_msg(MALLOC), free(line), NULL);
+		map[i] = NULL;
 		if (is_white(line) && !ft_strchr(line, ' '))
-			return (free(line), error_msg(ERR_NEWLINE_MAP),
-				ft_free((void **)map, -1), NULL);
+			return (free(line), error_msg(ERR_OPEN_MAP),
+					ft_free((void **)map, -1), NULL);
 		map[i++] = trim_back_nl(line);
 		line = get_next_line(fd);
 	}
