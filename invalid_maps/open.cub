@@ -1,5 +1,7 @@
-  SO ./textures/bricks_multicolor.xpm
-  NO ./textures/bricks_multicolor.xpm
+NO ./textures/abstract_green/green_N.xpm
+SO ./textures/abstract_green/green_S.xpm
+WE ./textures/abstract_green/green_W.xpm
+EA ./textures/abstract_green/green_E.xpm
 
 
 
@@ -11,11 +13,6 @@ F       255,   0,  0
 
 
 
-   EA ./textures/bricks_multicolor.xpm
-
-
-   WE     ./textures/bricks_multicolor.xpm
-
 
 
 
@@ -23,8 +20,5 @@ F       255,   0,  0
 1111111
 1000001
 100W001
-1000000
+ 1000001
 1111111
-
-
-

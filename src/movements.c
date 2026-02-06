@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 13:00:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/06 16:15:32 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:03:57 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	move_backward(t_map map, t_player *player, double dt)
 	}
 }
 
-void	move_left(t_map map, t_player *player, double dt)
+void	move_right(t_map map, t_player *player, double dt)
 {
 	t_vect	new;
 
@@ -51,7 +51,7 @@ void	move_left(t_map map, t_player *player, double dt)
 	}
 }
 
-void	move_right(t_map map, t_player *player, double dt)
+void	move_left(t_map map, t_player *player, double dt)
 {
 	t_vect	new;
 
