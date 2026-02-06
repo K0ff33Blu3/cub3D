@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:05:02 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/06 17:15:42 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:26:51 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	check_map(char **map, int line, int count, char *allowed)
 	int	i;
 
 	i = 0;
-	if (line == 0 || map[line + 1] == NULL || count == 0 || (count + 1) >= (int)ft_strlen(map[line]))
+	if (line == 0 || map[line + 1] == NULL
+		|| count == 0 || (count + 1) >= (int)ft_strlen(map[line]))
 		return (1);
 	if (ft_strchr("NSEW", map[line][count]))
 		allowed = "01NSEW ";
@@ -117,7 +118,7 @@ char	**get_map(char *line, int fd, int i)
 		printf("%s\n", line);
 		if (is_white(line) && !ft_strchr(line, ' '))
 			return (free(line), error_msg(ERR_OPEN_MAP),
-					ft_free((void **)map, -1), NULL);
+				ft_free((void **)map, -1), NULL);
 		map[i++] = trim_back_nl(line);
 		line = get_next_line(fd);
 	}

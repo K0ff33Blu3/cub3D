@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 13:02:57 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/06 14:38:02 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:27:03 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	set_tex_to_col(t_game *game, t_column *col)
 	if (col->line_height < LEN)
 		col->tex_pos.y = 0;
 	else
-		col->tex_pos.y = floor(((col->line_height - LEN) / 2.0) * col->delta_tex);
+		col->tex_pos.y = floor(((col->line_height - LEN)
+					/ 2.0) * col->delta_tex);
 }
 
 unsigned int	tex_get_pixel(t_image *tex, int x, int y)

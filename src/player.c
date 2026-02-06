@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 13:36:35 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/06 16:19:19 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:27:29 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ t_vect	set_player_dir(char **map, t_vect pos)
 	return (dir);
 }
 
-t_vect  set_player_camera(t_vect dir)
+t_vect	set_player_camera(t_vect dir)
 {
-    t_vect  camera;
-    double  k;
+	t_vect	camera;
+	double	k;
 
-    k = tan(deg_to_rad(FOV / 2));
-    camera.x = -dir.y * k;
-    camera.y =  dir.x * k;
-    return (camera);
+	k = tan(deg_to_rad(FOV / 2));
+	camera.x = -dir.y * k;
+	camera.y = dir.x * k;
+	return (camera);
 }
 
 bool	is_walkable(t_map *map, double x, double y)
