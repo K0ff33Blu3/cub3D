@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/06 11:40:38 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 14:33:08 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 // SCREEN
 
-# define WID	600
-# define LEN	400
+# define WID	1920
+# define LEN	1080
 
 // KEYLOG
 

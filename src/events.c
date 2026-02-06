@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:27:02 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/06 11:40:57 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 16:21:48 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int	loop_event(t_game *game)
 	if (game->k.d == true)
 		move_right(*game->map, game->map->player, dt);
 	if (game->k.left == true)
-		rotate(game->map->player, -(ROT * dt));
-	if (game->k.right == true)
 		rotate(game->map->player, ROT * dt);
+	if (game->k.right == true)
+		rotate(game->map->player, -(ROT * dt));
 	return (render_frame(game), 0);
 }
