@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/05 15:12:42 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:06:51 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define RIGHT 65363
 # define LSHIFT 65505
 # define LALT 65513
-
 
 // INCLUDE
 
@@ -63,7 +62,6 @@
 # define ERR_ARGS "incorrect arguments number"
 # define ERR_FORMAT "incorrect file format"
 # define ERR_OPEN "failed to open path"
-# define ERR_EMPTY_OR_FOLDER "path points to empty file or folder"	// INUTILIZZATO
 # define ERR_NEWLINE_MAP "empty line in map"
 # define ERR_OPEN_MAP "open map"
 # define ERR_NO_MAP "missing map"
@@ -84,7 +82,7 @@
 # define ROT	1
 # define FPS	60
 
-typedef	struct s_keys
+typedef struct s_keys
 {
 	bool	w;
 	bool	a;
@@ -95,25 +93,24 @@ typedef	struct s_keys
 	bool	esc;
 }	t_keys;
 
-typedef	enum e_side
+typedef enum e_side
 {
 	NO = 0,
 	EA = 1,
 	SO = 2,
 	WE = 3,
-} t_side;
+}	t_side;
 
 typedef struct s_image
 {
-    void    *img;
-    char    *addr;
-    int     width;
-    int     height;
-    int     bpp;
-    int     line_len;
-    int     endian;
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
 }	t_image;
-
 
 typedef struct s_vect
 {
@@ -125,9 +122,9 @@ typedef struct s_tile
 {
 	int	x;
 	int	y;
-} t_tile;
+}	t_tile;
 
-typedef	struct s_column
+typedef struct s_column
 {
 	int		line_height;
 	int		draw_start;
@@ -136,23 +133,21 @@ typedef	struct s_column
 	double	wall_x;
 	double	delta_tex;
 	int		wall_side;
-	t_image *tex;
+	t_image	*tex;
 }	t_column;
 
-
-typedef	struct s_ray
+typedef struct s_ray
 {
-	t_vect	dir;
-	t_tile	tile_pos;
-	t_vect	side_dist;
-	t_vect	delta_dist;
-	double	camera_x;
-	t_side	tile_side;
-	t_tile	tile_mov;
-	double	wall_dist;
+	t_vect		dir;
+	t_tile		tile_pos;
+	t_vect		side_dist;
+	t_vect		delta_dist;
+	double		camera_x;
+	t_side		tile_side;
+	t_tile		tile_mov;
+	double		wall_dist;
 	t_column	column;
-	t_vect	hitpoint;
-		// t_tile	step;
+	t_vect		hitpoint;
 }	t_ray;
 
 typedef struct s_player
@@ -160,7 +155,6 @@ typedef struct s_player
 	t_vect	pos;
 	t_vect	dir;
 	t_vect	camera;
-	
 }	t_player;
 
 typedef struct s_map
@@ -171,7 +165,7 @@ typedef struct s_map
 	char		*ea_text_path;
 	char		*we_text_path;
 	int			floor_rgb[3];
-	int		floor_hex;
+	int			floor_hex;
 	int			ceiling_rgb[3];
 	bool		floor_set;
 	bool		ceiling_set;
@@ -182,13 +176,13 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	void	*mlx;
-	t_image	*img;
-	void	*win;
-	t_map	*map;
-	t_image	*tex;
-	int	*texture;
-	t_keys	k;
+	void		*mlx;
+	t_image		*img;
+	void		*win;
+	t_map		*map;
+	t_image		*tex;
+	int			*texture;
+	t_keys		k;
 	uint64_t	last_frame;
 
 }	t_game;
@@ -269,6 +263,7 @@ void	putpixel(t_image *img, int x, int y, int color);
 t_vect set_player_pos(char **map);
 t_vect	set_player_dir(char **map, t_vect pos);
 t_vect set_player_camera(t_vect dir);
+bool	is_walkable(t_map *map, double x, double y);
 
 void	load_tex_img(t_image *tex, t_game *game, t_map *map);
 void	get_tex_info(t_image *tex);
