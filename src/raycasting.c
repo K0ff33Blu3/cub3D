@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 13:06:46 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/05 13:08:53 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:18:57 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static t_vect	get_delta_distance(t_vect dir)
 	if (dir.x != 0)
 		delta_dist.x = fabs(1.0 / dir.x);
 	else
-		delta_dist.x = DBL_MAX;
+		delta_dist.x = INT_MAX;
 	if (dir.y != 0)
 		delta_dist.y = fabs(1.0 / dir.y);
 	else
-		delta_dist.y = DBL_MAX;
+		delta_dist.y = INT_MAX;
 	return (delta_dist);
 }
 

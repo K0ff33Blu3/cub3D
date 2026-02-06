@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:20:37 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/05 13:11:09 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:19:16 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	render_frame(t_game *game)
 	while (x < WID)
 	{
 		ray = init_raycasting(game->map->player, x);
-		ray->hitpoint = DDA_loop(*game->map, ray);
+		ray->hitpoint = dda_loop(*game->map, ray);
 		ray->column = get_column(ray);
 		set_tex_to_col(game, &ray->column);
 		put_column(game, &ray->column, x);

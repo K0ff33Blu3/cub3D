@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/06 11:06:51 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:19:04 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@
 # include <X11/X.h>
 # include <stdbool.h>
 # include <limits.h>
-// # include <float.h>
 # include <stdbool.h>
 # include <math.h>
 
