@@ -1,12 +1,12 @@
-  SO ./textures/bricks_multicolor.xpm
+  SO ./textures/bricks_multicolor.xpm      
   NO ./textures/bricks_multicolor.xpm
 
 
 
-F       255,   0,  0
+F       255,   0,  0           
 
 
-    C       0,   0,  255
+    C       0     ,   0,  255
 
 
 

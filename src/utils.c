@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:06:21 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/27 13:29:28 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/06 13:17:42 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,18 @@ char	*trim_back_nl(char *str)
 {
 	size_t	i;
 
-	if (str[0] == '\n')
-		str[0] = '\0';
+	if (str[0] == '\n' || str[0] == ' ' || str[0] == '\t')
+	{
+		while (str[0] && (str[0] == '\n' || str[0] == ' ' || str[0] == '\t'))
+			str[0] = '\0';
+		return (str);
+	}
 	if (str[0] == '\0')
 		return (str);
 	i = ft_strlen(str) - 1;
-	while (str[i] == '\n')
+	while (i > 0 && (str[i] == '\n' || str[i] == ' ' || str[i] == '\t'))
 		i--;
-	if (str[i + 1] == '\n')
-		str[++i] = '\0';
+	str[i + 1] = '\0';
 	return (str);
 }
 

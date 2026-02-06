@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:05:02 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/06 11:46:17 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/06 13:13:20 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ int	check_map(char **map, int line, int count, char *allowed)
 	int	i;
 
 	i = 0;
-	if (line == 0 || map[line + 1] == NULL || count == 0
-		|| (count + 1) >= (int)ft_strlen(map[line]))
+	if (line == 0 || map[line + 1] == NULL || count == 0 || (count + 1) >= (int)ft_strlen(map[line]))
 		return (1);
 	if (ft_strchr("NSEW", map[line][count]))
 		allowed = "01NSEW ";
