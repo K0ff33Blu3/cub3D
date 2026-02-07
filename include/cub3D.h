@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 11:49:50 by elmondo           #+#    #+#             */
-/*   Updated: 2026/02/06 17:04:59 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/07 11:24:22 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@
 # define ERR_FC_FORMAT "color format invalid"
 # define ERR_FC_BOUNDS "color value out of bounds"
 
-# define MOV	1
+# define MOV	2.5
 # define FOV	70.0
-# define ROT	1
+# define ROT	1.5
 # define FPS	60
 
 typedef struct s_keys

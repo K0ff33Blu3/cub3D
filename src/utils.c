@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:06:21 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/06 13:17:42 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/07 11:32:28 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,21 @@ char	*trim_back_nl(char *str)
 {
 	size_t	i;
 
-	if (str[0] == '\n' || str[0] == ' ' || str[0] == '\t')
-	{
-		while (str[0] && (str[0] == '\n' || str[0] == ' ' || str[0] == '\t'))
-			str[0] = '\0';
-		return (str);
-	}
 	if (str[0] == '\0')
 		return (str);
 	i = ft_strlen(str) - 1;
-	while (i > 0 && (str[i] == '\n' || str[i] == ' ' || str[i] == '\t'))
+	while (i > 0 && str[i] == '\n')
 		i--;
-	str[i + 1] = '\0';
+	if (str[i] == '\n')
+		str[i] = '\0';
+	else
+		str[i + 1] = '\0';
 	return (str);
 }
 
 int	is_white(char *line)
 {
-	int	count;
+	int		count;
 
 	count = 0;
 	while (line[count])
