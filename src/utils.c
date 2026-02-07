@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:06:21 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/07 11:32:28 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/02/07 12:21:55 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ char	*trim_back_nl(char *str)
 	if (str[0] == '\0')
 		return (str);
 	i = ft_strlen(str) - 1;
-	while (i > 0 && str[i] == '\n')
+	while (i > 0 && (str[i] == '\n' || str[i] == ' ' || str[i] == '\t'))
 		i--;
-	if (str[i] == '\n')
+	if (str[i] == '\n' || str[i] == ' ' || str[i] == '\t')
 		str[i] = '\0';
 	else
 		str[i + 1] = '\0';

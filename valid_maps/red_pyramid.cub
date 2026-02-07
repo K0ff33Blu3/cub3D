@@ -1,6 +1,6 @@
-NO ./textures/abstract_red/red_N.xpm
+   NO ./textures/abstract_red/red_N.xpm
 SO ./textures/abstract_red/red_S.xpm
-WE ./textures/abstract_red/red_W.xpm
+  WE ./textures/abstract_red/red_W.xpm
 EA ./textures/abstract_red/red_E.xpm
 
 F 90, 90, 95

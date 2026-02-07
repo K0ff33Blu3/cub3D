@@ -1,21 +1,20 @@
-  SO ./textures/tiles/tile_S.xpm    
-  
-  NO ./textures/tiles/tile_N.xpm    
+SO ./textures/tiles/tile_S.xpm    
+NO ./textures/tiles/tile_N.xpm    
 
 
 
 F       255,   0,  0           
 
 
-    C       0     ,   0,  255
+C       0     ,   0,  255
 
 
 
 
-   EA ./textures/tiles/tile_E.xpm
+EA ./textures/tiles/tile_E.xpm
 
 
-   WE     ./textures/tiles/tile_W.xpm
+WE     ./textures/tiles/tile_W.xpm
 
 
 
