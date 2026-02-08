@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 13:36:35 by miricci           #+#    #+#             */
-/*   Updated: 2026/02/06 17:27:29 by miricci          ###   ########.fr       */
+/*   Updated: 2026/02/08 10:58:44 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ bool	is_walkable(t_map *map, double x, double y)
 	map_height = array_size((void **)map->skeleton);
 	if (grid.x < 0 || grid.y < 0 || grid.x >= map_width || grid.y >= map_height)
 		return (false);
-	return (map->skeleton[grid.y][grid.x] != '1');
+	return (ft_strchr("0NESW", map->skeleton[grid.y][grid.x]));
 }
